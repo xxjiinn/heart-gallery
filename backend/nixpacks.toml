@@ -5,7 +5,10 @@ nixPkgs = ["nodejs_20", "openssl"]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npx prisma generate", "npm run build"]
+cmds = [
+  "DATABASE_URL='mysql://user:pass@localhost:3306/db' npx prisma generate",
+  "npm run build"
+]
 
 [start]
 cmd = "npx prisma migrate deploy && npm run start:prod"
