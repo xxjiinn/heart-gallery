@@ -10,6 +10,9 @@ interface SquarePageProps {
 }
 
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
+  console.log('SquarePage - memories:', memories);
+  console.log('SquarePage - isLoading:', isLoading);
+
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -27,7 +30,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             
             <div className="flex items-center gap-2">
               <Heart className="w-6 h-6 text-[#FFB5D8] fill-[#FFB5D8]" />
-              <h2 className="text-[#C8B6FF]">Memory Gallery</h2>
+              <h2 className="text-[#C8B6FF]">Memory Gallery ({memories.length})</h2>
             </div>
             
             <div className="w-20"></div>
@@ -54,8 +57,8 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             </div>
           </div>
         ) : (
-          /* Grid Layout - Fixed positions */
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-12">
+          /* Grid Layout */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {memories.map((memory, index) => (
               <HeartCard key={memory.id} memory={memory} index={index} />
             ))}

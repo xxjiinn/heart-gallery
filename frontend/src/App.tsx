@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { MainPage } from './components/MainPage';
 import { SquarePage } from './components/SquarePage';
-import { projectId, publicAnonKey } from './utils/supabase/info';
 
 export interface HeartMemory {
-  id: string;
+  id: number;
   imageUrl: string;
   message: string;
-  createdAt: number;
+  createdAt: string;
 }
 
 export default function App() {
@@ -15,7 +14,7 @@ export default function App() {
   const [memories, setMemories] = useState<HeartMemory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const serverUrl = `https://${projectId}.supabase.co/functions/v1/make-server-c90918de`;
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   // Fetch memories on load
   useEffect(() => {
@@ -25,11 +24,7 @@ export default function App() {
   const fetchMemories = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${serverUrl}/memories`, {
-        headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-        },
-      });
+      const response = await fetch(`${apiUrl}/memories`);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -48,29 +43,36 @@ export default function App() {
     }
   };
 
-  const handleSaveMemory = async (imageData: string, message: string) => {
+  const handleSaveMemory = async (file: File, message: string) => {
     try {
-      const response = await fetch(`${serverUrl}/memories`, {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('message', message);
+
+      const response = await fetch(`${apiUrl}/upload`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ imageData, message }),
+        body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Failed to save memory:', errorData);
-        throw new Error(errorData.error || 'Failed to save memory');
+        throw new Error(errorData.message || 'Failed to save memory');
       }
 
-      const newMemory = await response.json();
-      setMemories((prev) => [newMemory, ...prev]);
+      const result = await response.json();
+      console.log('Upload response:', result);
+      const newMemory = result.data;
+      console.log('New memory:', newMemory);
+      setMemories((prev) => {
+        const updated = [newMemory, ...prev];
+        console.log('Updated memories:', updated);
+        return updated;
+      });
       setCurrentPage('square');
     } catch (error) {
       console.error('Error saving memory:', error);
-      alert(`Failed to save memory: ${error.message}. Please try again.`);
+      alert(`Failed to save memory: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
     }
   };
 

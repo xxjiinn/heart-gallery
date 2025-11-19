@@ -9,7 +9,7 @@ datasource db {
 
 model HeartMemory {
   id        Int      @id @default(autoincrement())
-  imageUrl  String
+  imageUrl  String   @db.VarChar(500)
   message   String
   createdAt DateTime @default(now())
 }

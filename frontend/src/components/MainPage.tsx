@@ -4,18 +4,25 @@ import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
 
 interface MainPageProps {
-  onSave: (imageUrl: string, message: string) => void;
+  onSave: (file: File, message: string) => void;
   onViewGallery: () => void;
 }
 
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const maxChars = 30;
 
+  const handleImageUpload = (file: File, previewUrl: string) => {
+    setUploadedFile(file);
+    setUploadedImage(previewUrl);
+  };
+
   const handleSave = () => {
-    if (uploadedImage && message.trim()) {
-      onSave(uploadedImage, message);
+    if (uploadedFile && message.trim()) {
+      onSave(uploadedFile, message);
+      setUploadedFile(null);
       setUploadedImage(null);
       setMessage('');
     }
@@ -45,8 +52,8 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
         {/* Upload Area */}
         <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-lg shadow-[#FFB5D8]/20 mb-6">
-          <HeartUpload 
-            onImageUpload={setUploadedImage} 
+          <HeartUpload
+            onImageUpload={handleImageUpload}
             uploadedImage={uploadedImage}
           />
 
@@ -69,7 +76,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         <div className="flex flex-col sm:flex-row gap-4">
           <Button
             onClick={handleSave}
-            disabled={!uploadedImage || !message.trim()}
+            disabled={!uploadedFile || !message.trim()}
             className="flex-1 py-6 rounded-2xl bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8] text-white shadow-lg shadow-[#FFB5D8]/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             <Heart className="w-5 h-5 mr-2" />

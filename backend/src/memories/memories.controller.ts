@@ -3,7 +3,7 @@ Springboot에서의 Controller
 */
 
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { MemoriesService } from './memories.service';
 
 @Controller('memories')
@@ -13,5 +13,10 @@ export class MemoriesController {
   @Get()
   async findAll() {
     return this.memoriesService.findAll();
+  }
+
+  @Post()
+  async create(@Body() body: { imageData: string; message: string }) {
+    return this.memoriesService.create(body.imageData, body.message);
   }
 }

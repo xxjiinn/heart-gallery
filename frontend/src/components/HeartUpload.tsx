@@ -3,7 +3,7 @@ import { Upload, Heart } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface HeartUploadProps {
-  onImageUpload: (imageUrl: string) => void;
+  onImageUpload: (file: File, previewUrl: string) => void;
   uploadedImage: string | null;
 }
 
@@ -15,8 +15,8 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const result = e.target?.result as string;
-        onImageUpload(result);
+        const previewUrl = e.target?.result as string;
+        onImageUpload(file, previewUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -67,6 +67,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
           {/* Heart Shape with Image or Placeholder */}
           <div
             className={`
+              relative z-0
               w-[280px] h-[280px] md:w-[320px] md:h-[320px]
               transition-all duration-300
               ${isDragging ? 'scale-110' : 'scale-100'}
@@ -93,21 +94,19 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
           </div>
 
           {/* Dashed Border Heart */}
-          {!uploadedImage && (
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-                fill="none"
-                stroke={isDragging ? '#FFB5D8' : '#E0D4FF'}
-                strokeWidth="0.5"
-                strokeDasharray="2,2"
-                className="transition-colors duration-300"
-              />
-            </svg>
-          )}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none z-20"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+              fill="none"
+              stroke={isDragging ? '#FFB5D8' : '#E0D4FF'}
+              strokeWidth="0.5"
+              strokeDasharray="2,2"
+              className="transition-colors duration-300"
+            />
+          </svg>
         </div>
       </div>
 
