@@ -12,8 +12,10 @@ export class S3Service {
   });
 
   async uploadFile(key: string, fileBuffer: Buffer, mimeType: string) {
+    const bucketName = process.env.AWS_S3_BUCKET || process.env.AWS_BUCKET_NAME;
+
     const command = new PutObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: bucketName,
       Key: key,
       Body: fileBuffer,
       ContentType: mimeType,
@@ -21,6 +23,6 @@ export class S3Service {
 
     await this.s3.send(command);
 
-    return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
+    return `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
   }
 }

@@ -15,7 +15,7 @@ export const s3 = new S3Client({
 // S3 storage 객체만 정의
 export const s3Storage = multerS3({
   s3: s3,
-  bucket: process.env.AWS_S3_BUCKET!,
+  bucket: process.env.AWS_S3_BUCKET || process.env.AWS_BUCKET_NAME,
   key: (req, file, cb) => {
     cb(null, `uploads/${randomUUID()}-${file.originalname}`);
   },
