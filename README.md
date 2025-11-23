@@ -1,6 +1,6 @@
 # Heart Gallery
 
-사진과 메시지를 하트 모양으로 저장하고 공유하는 추억 갤러리 서비스
+사랑을 느낀 순간을 사진과 메시지로 저장하고 공유하는 추억 갤러리 서비스
 
 ## 📁 프로젝트 구조
 
@@ -14,6 +14,7 @@ HeartGallery/
 ## 🛠 기술 스택
 
 ### Backend
+
 - NestJS
 - Prisma ORM
 - MySQL
@@ -21,6 +22,7 @@ HeartGallery/
 - TypeScript
 
 ### Frontend
+
 - React 19
 - TypeScript
 - Vite
@@ -32,6 +34,7 @@ HeartGallery/
 ### 1. 환경 변수 설정
 
 #### Backend
+
 `backend/.env` 파일을 생성하고 `.env.example`을 참고하여 설정:
 
 ```bash
@@ -41,6 +44,7 @@ cp .env.example .env
 ```
 
 #### Frontend
+
 `frontend/.env` 파일을 생성하고 백엔드 API URL 설정:
 
 ```bash

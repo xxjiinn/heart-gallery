@@ -117,7 +117,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
         className="mt-6 rounded-2xl border-2 border-[#FFB5D8] text-[#FFB5D8] hover:bg-[#FFB5D8]/10 px-8 py-5"
       >
         <Upload className="w-5 h-5 mr-2" />
-        {uploadedImage ? 'Change Image' : 'Upload Image'}
+        {uploadedImage ? '이미지 다시 선택' : '이미지 업로드'}
       </Button>
 
       <input

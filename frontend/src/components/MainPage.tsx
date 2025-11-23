@@ -42,11 +42,11 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#C8B6FF]">Heart Memory</h1>
+            <h1 className="text-[#C8B6FF]">아! 모먼트</h1>
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
           <p className="text-[#B8A0D5] opacity-80">
-            Capture moments that matter
+            사랑이 묻어났던 순간을<>br</>'아!모먼트'로 간직해보세요✨
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
               type="text"
               value={message}
               onChange={handleMessageChange}
-              placeholder="Write a short message (max 30 characters)"
+              placeholder="짧은 설명 문구를 작성해보세요. (30자 이내)"
               className="w-full px-6 py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#C8B6FF]/50"
             />
             <div className="text-right text-[#C8B6FF] opacity-60">
