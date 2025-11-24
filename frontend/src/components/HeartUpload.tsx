@@ -7,15 +7,16 @@ interface HeartUploadProps {
   uploadedImage: string | null;
 }
 
-export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) {
+export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) {   // 뒤에 "HeartUploadProps"라는 것을 붙인 이유: 부모로부터 'onImageUpload'와 'uploadedImage'라는 Props를 전달받아야 하므로 그 타입을 명시하여 안정성을 확보한 것.
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File) => {
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const previewUrl = e.target?.result as string;
+    if (file && file.type.startsWith('image/')) {   // 이미지 파일인지 유효성 검사.
+      const reader = new FileReader();  
+      reader.onload = (e) => {    // FileReader가 파일 데이터를 성공적으로 다 읽었을 때 실행될 함수
+        const previewUrl = e.target?.result as string;    // 이벤트 객체(e)의 결과 값(result)을 Base64 문자열로 가져와 previewUrl 변수에 저장. 프론트엔드에서 즉시 미리보기를 보여주기 위한 데이터. 나중에 브라우저는 외부 서버에 요청할 필요 없이 문자열 자체를 메몰 내에서 바로 디코딩하여 이미지로 표시한다.
+        // 장점: 사용자가 파일을 선택하는 즉시 이미지를 보여줄 수 있어 서버에 부하를 주지 않는다. => UX 굳.   (실제 서버에 저장되는 것은 Save Memory 버튼 클릭 시점이다.)
         onImageUpload(file, previewUrl);
       };
       reader.readAsDataURL(file);
@@ -38,15 +39,29 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
     handleFile(file);
   };
 
+  // 사용자가 파일 선택 대화 상자에서 파일을 고르고 "열기"를 누르는 순간, 브라우저는 해당 파일의 메타데이터(이름, 크기, 타입 등)와 데이터 접근 권한을 담고 있는 File 객체를 생성한다.
+  // 이렇게 사용자가 <input type="file">을 통해 파일을 선택하는 것을 "사용자 디스크에서 파일을 선택하여 웹 브라우저의 메모리로 가져온다"고 한다.
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       handleFile(file);
     }
+  /*
+  1. e.target -> 이벤트가 발생한 <input> 요소
+  2. e.target.files -> 이벤트가 발생한 <input> 요소에서 '사용자가 선택한 파일 목록'
+  3. e.target.files?.[0] -> 이벤트가 발생한 <input> 요소에서 사용자가 선택한 파일 목록 중 '첫 번째 파일'
+  - '?.'(옵셔널 체이닝)은 files가 없을 경우 에러를 방지한다.
+  */
   };
 
+  // 
+  
+  
+  // 사용자 디스크, 즉 파일 선택 상자(ex.finder)를 띄우는 코드.
   const handleClick = () => {
     fileInputRef.current?.click();
+    // 1. fileInputRef.current를 통해 숨겨진 <input> DOM 요소에 접근. 
+    // 2. click() 메서드를 강제로 호출하여 마치 사용자가 직접 <input type="file">을 클릭한 것처럼 파일 선택 대화 상자를 띄운다.
   };
 
   return (
@@ -120,6 +135,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
         {uploadedImage ? '이미지 다시 선택' : '이미지 업로드'}
       </Button>
 
+      {/* 사용자가 파일 선택 대화 상자에서 파일을 고르고 "열기"를 누르는 순간, 브라우저는 해당 파일의 메타데이터(이름, 크기, 타입 등)와 데이터 접근 권한을 담고 있는 File 객체를 생성한다. */}
       <input
         ref={fileInputRef}
         type="file"

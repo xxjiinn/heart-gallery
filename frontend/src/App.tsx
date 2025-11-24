@@ -25,6 +25,8 @@ export default function App() {
     try {
       setIsLoading(true);
       const response = await fetch(`${apiUrl}/memories`);
+      // response = 서버로부터 받을 HTTP 응답의 본문(Body).
+      // fetch 함수 안에 설정 객체({})를 2번째 인수로 받지 않았으므로 GET 요청이다.
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -36,7 +38,6 @@ export default function App() {
       setMemories(data);
     } catch (error) {
       console.error('Error fetching memories:', error);
-      // Fallback to empty array if server is not ready
       setMemories([]);
     } finally {
       setIsLoading(false);
@@ -50,7 +51,7 @@ export default function App() {
       formData.append('message', message);
 
       const response = await fetch(`${apiUrl}/upload`, {
-        method: 'POST',
+        method: 'POST',   // fetch 함수 안에 설정 객체({})를 2번째 인수로 받았으므로 GET 요청이 아닌 POST이다.
         body: formData,
       });
 
@@ -80,6 +81,9 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F0] via-[#FFE5F1] to-[#E0D4FF]">
       {currentPage === 'main' ? (
         <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
+        // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
+        // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
+        // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서 그제서야 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
       ) : (
         <SquarePage 
           memories={memories} 

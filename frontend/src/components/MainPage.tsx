@@ -9,12 +9,12 @@ interface MainPageProps {
 }
 
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);  // uploadedFile이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedFile이라는 함수를 사용하게끔 정의함. 초기값은 null.
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);  // uploadedImage이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedImage이라는 함수를 사용하게끔 정의함. 초기값은 null.
   const [message, setMessage] = useState('');
   const maxChars = 30;
 
-  const handleImageUpload = (file: File, previewUrl: string) => {
+  const handleImageUpload = (file: File, previewUrl: string) => {   // 함수임. 보통 사용자 상호작용을 처리하는 로직의 함수 이름은 'handle'로 시작함.
     setUploadedFile(file);
     setUploadedImage(previewUrl);
   };
@@ -35,6 +35,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
     }
   };
 
+  // 화면에 렌더링할 UI를 반환.
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-2xl">
