@@ -40,16 +40,16 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 px-6 md:px-8 pb-8">
+    <div className="min-h-screen flex flex-col items-center justify-center md:justify-center pt-8 px-6 md:px-8 pb-8">
       <div className="w-full max-w-md md:max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-4 md:mb-4 md:mt-4">
-          <div className="flex items-center justify-center gap-5 mb-5 md:mb-8">
+        <div className="text-center mb-4 md:mb-3 md:mt-0">
+          <div className="flex items-center justify-center gap-5 mb-5 md:mb-4">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
             <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
-          <p className="text-[#6634FF] opacity-80 font-arita font-bold md:mt-10 text-base md:text-lg">
+          <p className="text-[#6634FF] opacity-80 font-arita font-bold md:mt-4 text-base md:text-lg">
             사랑이 묻어났던 순간을
           </p>
           <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-lg">
@@ -58,14 +58,14 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Upload Area */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-8 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-6">
+        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-5 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-4">
           <HeartUpload
             onImageUpload={handleImageUpload}
             uploadedImage={uploadedImage}
           />
 
           {/* Message Input */}
-          <div className="mt-8 md:mt-10 space-y-1">
+          <div className="mt-8 md:mt-5 space-y-1">
             <input
               type="text"
               value={message}
@@ -80,12 +80,12 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col items-center gap-3 md:gap-4">
+        <div className="flex flex-col items-center gap-3 md:gap-3">
           <Button
             onClick={handleSave}
             disabled={isSaveDisabled}
             className={`
-              w-full md:w-[600px] py-4 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
+              w-full md:w-[600px] py-4 md:py-5 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
               ${isSaveDisabled
                 ? 'bg-gray-300 hover:bg-gray-300/90'
                 : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'
@@ -99,7 +99,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           <Button
             onClick={onViewGallery}
             variant="outline"
-            className="w-full md:w-[600px] py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+            className="w-full md:w-[600px] py-4 md:py-5 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
           >
             갤러리 보기
           </Button>
