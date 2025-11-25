@@ -64,11 +64,15 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       >
         {/* Heart Container with SVG Mask */}
         <div className="relative w-full h-full flex items-center justify-center">
-          <svg className="w-[280px] h-[280px] md:w-[320px] md:h-[320px]" viewBox="0 0 24 24">
+          <svg className="w-[220px] h-[220px] md:w-[320px] md:h-[320px]" viewBox="0 0 24 24">
             <defs>
               <clipPath id="heartClip">
                 <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
               </clipPath>
+              {/* 블러 필터 추가 */}
+              <filter id="softBlur">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" />
+              </filter>
             </defs>
 
             {/* Heart Background with Image or Placeholder */}
@@ -87,12 +91,13 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
               )}
             </g>
 
-            {/* Heart Border */}
+            {/* Heart Border with Blur */}
             <path
               d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
               fill="none"
               stroke="#FFCCE4"
               strokeWidth="0.5"
+              filter="url(#softBlur)"
             />
           </svg>
         </div>
@@ -102,9 +107,9 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       <Button
         onClick={handleClick}
         variant="outline"
-        className="mt-6 rounded-2xl border-2 border-[#FFB5D8] text-[#FFB5D8] hover:bg-[#FFB5D8]/10 px-8 py-5"
+        className="mt-3 md:mt-6 rounded-2xl border-2 border-[#FFB5D8] text-[#FFB5D8] hover:bg-[#FFB5D8]/10 px-6 py-3 md:px-8 md:py-5 text-sm md:text-base"
       >
-        <Upload className="w-5 h-5 mr-2" />
+        <Upload className="w-4 h-4 md:w-5 md:h-5 mr-2" />
         {uploadedImage ? '이미지 다시 선택' : '이미지 업로드'}
       </Button>
 
