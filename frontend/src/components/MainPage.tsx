@@ -9,12 +9,12 @@ interface MainPageProps {
 }
 
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);  // uploadedFile이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedFile이라는 Setter 함수를 사용하게끔 정의함. 초기값은 null.
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);  // uploadedImage이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedImage이라는 Setter 함수를 사용하게끔 정의함. 초기값은 null.
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const maxChars = 30;
 
-  const handleImageUpload = (file: File, previewUrl: string) => {   // 함수임. 보통 사용자 상호작용을 처리하는 로직의 함수 이름은 'handle'로 시작함.
+  const handleImageUpload = (file: File, previewUrl: string) => {
     setUploadedFile(file);
     setUploadedImage(previewUrl);
   };
@@ -34,16 +34,19 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
       setMessage(value);
     }
   };
+  
+  // 버튼 활성화 여부
+  const isSaveDisabled = !uploadedFile || !message.trim();
 
   // 화면에 렌더링할 UI를 반환.
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-2xl">
-        {/* Header */}
+        {/* Header (생략) */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#C8B6FF] font-arita">아! 모먼트</h1>
+            <h1 className="text-[#C8B6FF] font-arita font-bold">아! 모먼트</h1>
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
           <p className="text-[#B8A0D5] opacity-80 font-arita">
@@ -80,11 +83,18 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         <div className="flex flex-col sm:flex-row gap-4">
           <Button
             onClick={handleSave}
-            disabled={!uploadedFile || !message.trim()}
-            className="flex-1 py-6 rounded-2xl bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8] text-white shadow-lg shadow-[#FFB5D8]/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            disabled={isSaveDisabled}
+            // 버튼 색상 로직 수정: 이미지 선택 여부에 따라 배경색 변경
+            className={`
+              flex-1 py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all
+              ${isSaveDisabled 
+                ? 'bg-gray-300 hover:bg-gray-300/90' // 비활성화 (회색)
+                : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]' // 활성화 (핑크색)
+              }
+            `}
           >
             <Heart className="w-5 h-5 mr-2" />
-            Save Memory
+            순간을 간직하기 {/* 텍스트 변경 */}
           </Button>
           
           <Button
@@ -92,7 +102,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
             variant="outline"
             className="py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] hover:bg-[#C8B6FF]/10"
           >
-            View Gallery
+            갤러리 보기 {/* 텍스트 변경 */}
           </Button>
         </div>
       </div>
