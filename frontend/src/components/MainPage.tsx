@@ -40,32 +40,32 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center md:justify-center pt-8 px-6 md:px-8 pb-8">
-      <div className="w-full max-w-md md:max-w-5xl">
+    <div className="min-h-screen flex flex-col items-center justify-start md:justify-center pt-4 md:pt-8 px-6 md:px-8 pb-8">
+      <div className="w-full max-w-md md:max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-4 md:mb-3 md:mt-0">
-          <div className="flex items-center justify-center gap-5 mb-5 md:mb-4">
+        <div className="text-center mb-3 md:mb-3 md:mt-0">
+          <div className="flex items-center justify-center gap-5 mb-3 md:mb-4">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
             <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
-          <p className="text-[#6634FF] opacity-80 font-arita font-bold md:mt-4 text-base md:text-lg">
+          <p className="text-[#6634FF] opacity-80 font-arita font-bold md:mt-3 text-base md:text-base">
             사랑이 묻어났던 순간을
           </p>
-          <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-lg">
+          <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-base">
             '아! 모먼트'로 간직해보세요✨
           </p>
         </div>
 
         {/* Upload Area */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-5 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-4">
+        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-5 shadow-lg shadow-[#FFB5D8]/20 mb-2 md:mb-4">
           <HeartUpload
             onImageUpload={handleImageUpload}
             uploadedImage={uploadedImage}
           />
 
           {/* Message Input */}
-          <div className="mt-8 md:mt-5 space-y-1">
+          <div className="mt-6 md:mt-5 space-y-1">
             <input
               type="text"
               value={message}
@@ -80,7 +80,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col items-center gap-3 md:gap-3">
+        <div className="flex flex-col items-center gap-2 md:gap-3">
           <Button
             onClick={handleSave}
             disabled={isSaveDisabled}
