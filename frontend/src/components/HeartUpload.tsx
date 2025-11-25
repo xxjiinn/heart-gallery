@@ -57,13 +57,12 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
         onDrop={handleDrop}
         onClick={handleClick}
         className={`
-          relative w-full max-w-md aspect-square cursor-pointer
-          transition-all duration-300
+          cursor-pointer transition-all duration-300
           ${isDragging ? 'scale-105' : 'scale-100'}
         `}
       >
         {/* Heart Container with SVG Mask */}
-        <div className="relative w-full h-full flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <svg className="w-[300px] h-[300px] md:w-[400px] md:h-[440px]" viewBox="0 0 24 24">
             <defs>
               <clipPath id="heartClip">
@@ -107,9 +106,9 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       <Button
         onClick={handleClick}
         variant="outline"
-        className="mt-1 md:mt-1 rounded-2xl border-2 border-[#FFB5D8] text-[#FFB5D8] hover:bg-[#FFB5D8]/10 px-8 py-3 md:px-10 md:py-5 text-base md:text-lg"
+        className="mt-1 md:mt-1 rounded-2xl border-2 border-[#FFB5D8] text-[#FFB5D8] bg-white hover:bg-[#FFB5D8]/10 px-8 py-3 md:px-10 md:py-5 text-base md:text-lg"
       >
-        <Upload className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+        <Upload className="w-4 h-4 md:w-6 md:h-6 mr-2" />
         {uploadedImage ? '이미지 다시 선택' : '이미지 업로드'}
       </Button>
 
