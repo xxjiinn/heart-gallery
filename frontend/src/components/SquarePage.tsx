@@ -14,7 +14,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
   console.log('SquarePage - isLoading:', isLoading);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-8">
       {/* Header */}
       <div className="relative z-10 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
@@ -39,7 +39,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
       </div>
 
       {/* Grid Container */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="animate-pulse text-center">
