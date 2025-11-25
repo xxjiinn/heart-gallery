@@ -40,7 +40,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-[160vh] md:min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 md:pt-4 px-6 md:px-8 pb-8">
+    <div className="min-h-[160vh] md:min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 md:pt-4 px-6 md:px-8 pb-8 overflow-hidden md:overflow-visible">
       <div className="w-full max-w-md md:max-w-5xl">
         {/* Header */}
         <div className="text-center mb-4 md:mb-6">
