@@ -40,11 +40,11 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start md:justify-center pt-8 md:pt-8 px-6 md:px-8 pb-8">
-      <div className="w-full max-w-md md:max-w-2xl">
+    <div className="min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 md:pt-4 px-6 md:px-8 pb-8">
+      <div className="w-full max-w-md md:max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-4 md:mb-2">
-          <div className="flex items-center justify-center gap-2 mb-5">
+        <div className="text-center mb-4 md:mb-6">
+          <div className="flex items-center justify-center gap-2 mb-5 md:mb-8">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
             <h1 className="text-[#C8B6FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
@@ -58,14 +58,14 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Upload Area */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-10 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-6">
+        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-8 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-6">
           <HeartUpload
             onImageUpload={handleImageUpload}
             uploadedImage={uploadedImage}
           />
 
           {/* Message Input */}
-          <div className="mt-8 md:mt-12 space-y-1">
+          <div className="mt-8 md:mt-10 space-y-1">
             <input
               type="text"
               value={message}
@@ -80,12 +80,12 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
           <Button
             onClick={handleSave}
             disabled={isSaveDisabled}
             className={`
-              flex-1 py-4 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
+              w-full md:w-96 py-4 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
               ${isSaveDisabled
                 ? 'bg-gray-300 hover:bg-gray-300/90'
                 : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'
@@ -99,7 +99,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           <Button
             onClick={onViewGallery}
             variant="outline"
-            className="py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+            className="w-full md:w-96 py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
           >
             갤러리 보기
           </Button>
