@@ -13,6 +13,8 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'main' | 'square'>('main');
   const [memories, setMemories] = useState<HeartMemory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -48,6 +50,9 @@ export default function App() {
 
   const handleSaveMemory = async (file: File, message: string) => {
     try {
+      // 로딩 시작
+      setIsSaving(true);
+
       const formData = new FormData();
       formData.append('file', file);
       formData.append('message', message);
@@ -72,26 +77,63 @@ export default function App() {
         console.log('Updated memories:', updated);
         return updated;
       });
-      setCurrentPage('square');
+
+      // 로딩 끝
+      setIsSaving(false);
+
+      // 성공 모달 표시
+      setShowSuccessModal(true);
+
+      // 1.5초 후 갤러리로 이동
+      setTimeout(() => {
+        setShowSuccessModal(false);
+        setCurrentPage('square');
+      }, 1500);
     } catch (error) {
+      setIsSaving(false);
       console.error('Error saving memory:', error);
       alert(`Failed to save memory: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
     }
   };
 
   return (
-    <div className="min-h-[160vh] md:min-h-screen bg-gradient-to-b from-[#FFE5F1] via-[#FFD6E8] to-[#E0D4FF] overflow-hidden md:overflow-auto">
+    <div className="min-h-[160vh] md:min-h-screen bg-gradient-to-b from-[#FFF8F0] via-[#FFD6E8] to-[#E0D4FF] overflow-hidden md:overflow-auto">
       {currentPage === 'main' ? (
         <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
-        // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
-        // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
-        // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서 그제서야 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
+          // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
+          // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
+          // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서 그제서야 
+          // 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
       ) : (
-        <SquarePage 
-          memories={memories} 
+        <SquarePage
+          memories={memories}
           onBackToMain={() => setCurrentPage('main')}
           isLoading={isLoading}
         />
+      )}
+
+      {/* Loading Modal */}
+      {isSaving && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+            <div className="w-16 h-16 border-4 border-[#C8B6FF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <h2 className="text-xl font-arita font-bold text-[#C8B6FF]">저장 중...</h2>
+          </div>
+        </div>
+      )}
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+            <div className="w-16 h-16 bg-[#C8B6FF] rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 className="text-xl font-arita font-bold text-[#C8B6FF]">저장되었습니다!</h2>
+          </div>
+        </div>
       )}
     </div>
   );
