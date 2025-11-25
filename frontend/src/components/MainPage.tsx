@@ -40,20 +40,20 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-[160vh] md:min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 md:pt-4 px-6 md:px-8 pb-8 overflow-hidden md:overflow-visible">
+    <div className="min-h-[160vh] md:min-h-screen flex flex-col items-center justify-start md:justify-start pt-8 px-6 md:px-8 pb-8 overflow-hidden md:overflow-visible">
       <div className="w-full max-w-md md:max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-4 md:mb-6">
-          <div className="flex items-center justify-center gap-2 mb-5 md:mb-8">
+        <div className="text-center mb-4 md:mb-4 md:mt-4">
+          <div className="flex items-center justify-center gap-5 mb-5 md:mb-8">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#C8B6FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
+            <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
-          <p className="text-[#B8A0D5] opacity-80 font-arita text-sm md:text-base">
+          <p className="text-[#6634FF] opacity-80 font-arita font-bold md:mt-10 text-base md:text-lg">
             사랑이 묻어났던 순간을
           </p>
-          <p className="text-[#B8A0D5] opacity-80 font-arita text-sm md:text-base">
-            '아!모먼트'로 간직해보세요✨
+          <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-lg">
+            '아! 모먼트'로 간직해보세요✨
           </p>
         </div>
 
