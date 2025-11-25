@@ -65,7 +65,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           />
 
           {/* Message Input */}
-          <div className="mt-3 md:mt-6 space-y-1">
+          <div className="mt-8 md:mt-12 space-y-1">
             <input
               type="text"
               value={message}
