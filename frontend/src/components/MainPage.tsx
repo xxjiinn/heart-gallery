@@ -9,8 +9,8 @@ interface MainPageProps {
 }
 
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);  // uploadedFile이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedFile이라는 함수를 사용하게끔 정의함. 초기값은 null.
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);  // uploadedImage이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedImage이라는 함수를 사용하게끔 정의함. 초기값은 null.
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);  // uploadedFile이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedFile이라는 Setter 함수를 사용하게끔 정의함. 초기값은 null.
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);  // uploadedImage이라는 상태 변수를 선언함. 이 변수의 값을 수정하려면 setUploadedImage이라는 Setter 함수를 사용하게끔 정의함. 초기값은 null.
   const [message, setMessage] = useState('');
   const maxChars = 30;
 
@@ -43,11 +43,14 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#C8B6FF]">아! 모먼트</h1>
+            <h1 className="text-[#C8B6FF] font-arita">아! 모먼트</h1>
             <Heart className="w-8 h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
-          <p className="text-[#B8A0D5] opacity-80">
-            사랑이 묻어났던 순간을<>br</>'아!모먼트'로 간직해보세요✨
+          <p className="text-[#B8A0D5] opacity-80 font-arita">
+            사랑이 묻어났던 순간을
+          </p>
+          <p className="text-[#B8A0D5] opacity-80 font-arita">
+            '아!모먼트'로 간직해보세요✨
           </p>
         </div>
 

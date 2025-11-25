@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        arita: ['Arita Buri KR', 'serif'], 
+      },
+    },
   },
   plugins: [],
 }

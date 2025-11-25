@@ -17,6 +17,8 @@ export default function App() {
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   // Fetch memories on load
+  // useEffect의 의존성 배열(두번째 인자)이 빈 배열([]) 이므로, 이 훅은 처음 화면에 마운트(Mount)될 때 (페이지에 처음 나타날 때) 오직 1회만 실행된다. 
+  // 즉, setMemories 호출로 인해 App 컴포넌트가 재렌더링되더라도, fetchMemories()는 다시 호출되지 않는다.
   useEffect(() => {
     fetchMemories();
   }, []);
@@ -34,8 +36,8 @@ export default function App() {
         throw new Error('Failed to fetch memories');
       }
 
-      const data = await response.json();
-      setMemories(data);
+      const data = await response.json();   // 서버로부터 받은 JSON 응답 본문을 Javascript 객체로 변환한다.
+      setMemories(data);    // 단순한 변수 대입이 아니라, React 시스템에 "데이터가 바뀌었으니 화면을 다시 그려라"는 신호를 보내는 것이다.
     } catch (error) {
       console.error('Error fetching memories:', error);
       setMemories([]);
