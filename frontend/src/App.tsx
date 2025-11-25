@@ -80,7 +80,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-[160vh] md:min-h-screen bg-gradient-to-b from-[#FFF8F0] via-[#FFE5F1] to-[#E0D4FF] overflow-hidden md:overflow-auto">
+    <div className="min-h-[160vh] md:min-h-screen bg-gradient-to-b from-[#FFE5F1] via-[#FFD6E8] to-[#E0D4FF] overflow-hidden md:overflow-auto">
       {currentPage === 'main' ? (
         <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
         // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
