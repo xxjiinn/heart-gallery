@@ -25,11 +25,11 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
               <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
             </div>
             <p className="text-[#6634FF] opacity-80 font-arita font-bold mt-6 md:mt-10 text-base md:text-lg">
-              사랑이 묻어났던 순간을
+              🫶 누군가의 사랑이 담긴 순간을 함께 느껴보세요 🫶
             </p>
-            <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-lg">
+            {/* <p className="text-[#6634FF] opacity-80 font-arita font-bold text-base md:text-lg">
               '아! 모먼트'로 간직해보세요✨
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
