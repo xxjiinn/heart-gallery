@@ -40,8 +40,8 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 md:p-8">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-[160vh] flex flex-col items-center justify-center py-8 px-6 md:p-8">
+      <div className="w-full max-w-md md:max-w-xl">
         {/* Header */}
         <div className="text-center mb-4 md:mb-2">
           <div className="flex items-center justify-center gap-2 mb-5">
