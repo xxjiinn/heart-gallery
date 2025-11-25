@@ -13,8 +13,8 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'main' | 'square'>('main');
   const [memories, setMemories] = useState<HeartMemory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);                  // 저장 중.
+  const [showSuccessModal, setShowSuccessModal] = useState(false);    // 저장 성공.
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -97,7 +97,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-[160vh] md:min-h-screen bg-gradient-to-b from-[#FFF8F0] via-[#FFD6E8] to-[#E0D4FF] overflow-hidden md:overflow-auto">
+    <div className={`min-h-screen ${currentPage === 'main' ? 'overflow-hidden md:overflow-auto' : 'overflow-auto'}`} style={{ background: 'linear-gradient(to bottom, #FFF8F0 0%, #FFD6E8 50%, #EDD9F5 100%)', backgroundAttachment: 'fixed' }}>
       {currentPage === 'main' ? (
         <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
           // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
