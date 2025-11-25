@@ -40,7 +40,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-2 px-4 md:p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 md:p-8">
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-4 md:mb-8">
@@ -58,20 +58,20 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Upload Area */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-4 md:p-12 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-6">
+        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-10 shadow-lg shadow-[#FFB5D8]/20 mb-3 md:mb-6">
           <HeartUpload
             onImageUpload={handleImageUpload}
             uploadedImage={uploadedImage}
           />
 
           {/* Message Input */}
-          <div className="mt-4 md:mt-8 space-y-1">
+          <div className="mt-3 md:mt-6 space-y-1">
             <input
               type="text"
               value={message}
               onChange={handleMessageChange}
               placeholder="짧은 설명 문구를 작성해보세요. (30자 이내)"
-              className="w-full px-4 py-3 md:px-6 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#C8B6FF]/50 text-sm md:text-base"
+              className="w-full px-4 py-2.5 md:px-6 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#C8B6FF]/50 text-sm md:text-base"
             />
             <div className="text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
               {message.length} / {maxChars}
