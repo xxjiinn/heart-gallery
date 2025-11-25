@@ -62,49 +62,37 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
           ${isDragging ? 'scale-105' : 'scale-100'}
         `}
       >
-        {/* Heart Container */}
+        {/* Heart Container with SVG Mask */}
         <div className="relative w-full h-full flex items-center justify-center">
-          {/* Heart Shape with Image or Placeholder */}
-          <div
-            className={`
-              relative z-0
-              w-[280px] h-[280px] md:w-[320px] md:h-[320px]
-              transition-all duration-300
-              ${isDragging ? 'scale-110' : 'scale-100'}
-            `}
-            style={{
-              clipPath: 'path("M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z")',
-              transform: 'scale(13.5)',
-            }}
-          >
-            {uploadedImage ? (
-              <img
-                src={uploadedImage}
-                alt="Uploaded memory"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              // 수정된 부분: 내부를 하얀색 하트로 변경
-              <div className="w-full h-full bg-white flex items-center justify-center"> 
-                <div className="text-center" style={{ transform: 'scale(0.074)' }}>
-                  <Heart className="w-24 h-24 text-gray-300 mx-auto" /> {/* 아이콘 색상도 변경 */}
-                </div>
-              </div>
-            )}
-          </div>
+          <svg className="w-[280px] h-[280px] md:w-[320px] md:h-[320px]" viewBox="0 0 24 24">
+            <defs>
+              <clipPath id="heartClip">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+              </clipPath>
+            </defs>
 
-          {/* Dashed Border Heart -> Solid Pink Border Heart로 변경 */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none z-20"
-            viewBox="0 0 24 24"
-          >
+            {/* Heart Background with Image or Placeholder */}
+            <g clipPath="url(#heartClip)">
+              {uploadedImage ? (
+                <image
+                  href={uploadedImage}
+                  x="0"
+                  y="0"
+                  width="24"
+                  height="24"
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              ) : (
+                <rect x="0" y="0" width="24" height="24" fill="white" />
+              )}
+            </g>
+
+            {/* Heart Border */}
             <path
               d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
               fill="none"
-              stroke={'#FFCCE4'} // 핑크색 테두리로 고정
+              stroke="#FFCCE4"
               strokeWidth="0.5"
-              // strokeDasharray="2,2" // 점선 제거
-              className="transition-colors duration-300"
             />
           </svg>
         </div>
