@@ -43,8 +43,8 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
     <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 md:p-8">
       <div className="w-full max-w-2xl">
         {/* Header */}
-        <div className="text-center mb-4 md:mb-8">
-          <div className="flex items-center justify-center gap-2 mb-2">
+        <div className="text-center mb-4 md:mb-2">
+          <div className="flex items-center justify-center gap-2 mb-5">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
             <h1 className="text-[#C8B6FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
