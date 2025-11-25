@@ -26,7 +26,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
     e.preventDefault();
     setIsDragging(true);
   };
-
+// 
   const handleDragLeave = () => {
     setIsDragging(false);
   };

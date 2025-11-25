@@ -51,7 +51,6 @@ export function HeartCard({ memory, index }: HeartCardProps) {
               <rect x="0" y="0" width="24" height="24" fill="white" />
               <foreignObject x="4" y="8" width="16" height="7">
                 <div
-                  xmlns="http://www.w3.org/1999/xhtml"
                   style={{
                     width: '100%',
                     height: '100%',
