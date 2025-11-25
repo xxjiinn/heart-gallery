@@ -85,7 +85,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
             onClick={handleSave}
             disabled={isSaveDisabled}
             className={`
-              w-full md:w-96 py-4 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
+              w-full md:w-[600px] py-4 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
               ${isSaveDisabled
                 ? 'bg-gray-300 hover:bg-gray-300/90'
                 : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'
@@ -99,7 +99,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           <Button
             onClick={onViewGallery}
             variant="outline"
-            className="w-full md:w-96 py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+            className="w-full md:w-[600px] py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
           >
             갤러리 보기
           </Button>
