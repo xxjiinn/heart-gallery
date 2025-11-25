@@ -71,7 +71,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
               value={message}
               onChange={handleMessageChange}
               placeholder="짧은 설명 문구를 작성해보세요. (30자 이내)"
-              className="w-full px-4 py-2.5 md:px-6 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#C8B6FF]/50 text-sm md:text-base"
+              className="w-full px-4 py-2.5 md:px-6 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#AC91FF] text-sm md:text-base"
             />
             <div className="text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
               {message.length} / {maxChars}
@@ -99,7 +99,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           <Button
             onClick={onViewGallery}
             variant="outline"
-            className="py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+            className="py-4 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
           >
             갤러리 보기
           </Button>
