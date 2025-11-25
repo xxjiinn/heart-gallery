@@ -97,7 +97,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen fixed inset-0" style={{ background: 'linear-gradient(to bottom, #FFF8F0 0%, #FFD6E8 50%, #EDD9F5 100%)' }}>
+    <div className="min-h-screen fixed inset-0" style={{ background: 'linear-gradient(to bottom, #FFF8F0 20%, #FFD6E8 50%, #E0D4FF 100%)' }}>
       <div className="min-h-screen overflow-auto">
       {currentPage === 'main' ? (
         <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
