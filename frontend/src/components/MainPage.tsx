@@ -46,7 +46,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         <div className="text-center mb-3 md:mb-3 md:mt-0">
           <div className="flex items-center justify-center gap-5 mb-3 md:mb-4">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아! 모먼트</h1>
+            <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아!愛 모먼트</h1>
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
           </div>
           <p className="text-[#6634FF] opacity-60 md:opacity-80 font-arita font-bold md:mt-3 text-base md:text-base">
