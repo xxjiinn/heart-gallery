@@ -7,8 +7,7 @@
 ```
 HeartGallery/
 ├── backend/          # NestJS 백엔드
-├── frontend/         # React + Vite 프론트엔드
-└── frontend_raw/     # 원본 프론트엔드 파일
+└── frontend          # React + Vite 프론트엔드
 ```
 
 ## 🛠 기술 스택
@@ -98,9 +97,3 @@ npm run dev
 - AWS 자격 증명은 반드시 안전하게 관리
 
 ## 📦 배포
-
-배포 시 각 환경의 `.env` 파일에 프로덕션 환경 변수를 설정해야 합니다.
-
-## 📄 라이센스
-
-Private

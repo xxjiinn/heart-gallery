@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { MainPage } from './components/MainPage';
 import { SquarePage } from './components/SquarePage';
 
@@ -10,10 +11,10 @@ export interface HeartMemory {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'main' | 'square'>('main');
+  const navigate = useNavigate();
   const [memories, setMemories] = useState<HeartMemory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);                  // 저장 중.
+  const [isSaving, setIsSaving] = useState(false);                  // 저장 중.
   const [showSuccessModal, setShowSuccessModal] = useState(false);    // 저장 성공.
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
@@ -87,7 +88,7 @@ export default function App() {
       // 1.5초 후 갤러리로 이동
       setTimeout(() => {
         setShowSuccessModal(false);
-        setCurrentPage('square');
+        navigate('/gallery');
       }, 1500);
     } catch (error) {
       setIsSaving(false);
@@ -99,26 +100,27 @@ export default function App() {
   return (
     <div className="min-h-screen fixed inset-0 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 50%, #E0D4FF 100%)' }}>
       <div className="h-full overflow-y-auto">
-      {currentPage === 'main' ? (
-        <MainPage onSave={handleSaveMemory} onViewGallery={() => setCurrentPage('square')} />
-          // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
-          // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
-          // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서 그제서야 
-          // 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
-      ) : (
-        <SquarePage
-          memories={memories}
-          onBackToMain={() => setCurrentPage('main')}
-          isLoading={isLoading}
-        />
-      )}
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage onSave={handleSaveMemory} onViewGallery={() => navigate('/gallery')} />}
+            // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
+            // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
+            // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서
+            // 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
 
+          />
+          <Route
+            path="/gallery"
+            element={<SquarePage memories={memories} onBackToMain={() => navigate('/')} isLoading={isLoading} />}
+          />
+        </Routes>
       </div>
 
       {/* Loading Modal */}
       {isSaving && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 max-w-[280px] md:max-w-sm w-full text-center shadow-2xl">
             <div className="w-16 h-16 border-4 border-[#C8B6FF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <h2 className="text-xl font-bold text-[#9747FF]">저장 중...</h2>
           </div>
@@ -128,7 +130,7 @@ export default function App() {
       {/* Success Modal */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 max-w-[280px] md:max-w-sm w-full text-center shadow-2xl">
             <div className="w-16 h-16 bg-[#9747FF] rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
