@@ -16,7 +16,7 @@ export class MemoriesController {
   }
 
   @Post()
-  async create(@Body() body: { imageData: string; message: string }) {
-    return this.memoriesService.create(body.imageData, body.message);
+  async create(@Body() body: { imageData: string; nickname: string; message: string }) {
+    return this.memoriesService.create(body.imageData, body.nickname, body.message);
   }
 }
