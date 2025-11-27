@@ -65,10 +65,10 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         {/* Subtitle */}
         <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
           <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
-            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[14px] md:text-[16px] leading-[20px] md:leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
               "아! 이건 틀림 없이 사랑이다!"
             </p>
-            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[14px] md:text-[16px] leading-[20px] md:leading-[22px] text-center mt-0" style={{ letterSpacing: '-0.466px' }}>
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center mt-0" style={{ letterSpacing: '-0.466px' }}>
               ✨ 지나쳤던 일상 속 사랑의 순간을 떠올려보세요 ✨
             </p>
           </div>

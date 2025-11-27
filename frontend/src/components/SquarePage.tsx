@@ -25,14 +25,14 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
           <span className="font-semibold text-sm md:text-base">Back</span>
         </button>
-
+        
         {/* Center Title */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[11px]">
-          <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
-          <h1 className="text-[#A381FF] font-semibold text-[20px] leading-[24px] w-[160px] text-center">
+          <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
+          <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[135px] md:w-[160px] text-center">
             아!愛 모먼트 갤러리
           </h1>
-          <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
+          <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
         </div>
 
         {/* Title과 좌우 균형을 맞추기 위한 빈 칸 */}
@@ -42,16 +42,16 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
 
       {/* Subtitle (페이지1과 동일하게 적용) */}
-      <div className="text-center mt-4 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
+      <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
         <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
           <p
-            className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] md:text-[16px] leading-[22px] md:leading-[22px] text-center"
+            className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center"
             style={{ letterSpacing: '-0.466px' }}
           >
             "아! 이건 틀림 없이 사랑이다!"
           </p>
           <p
-            className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] md:text-[16px] leading-[22px] md:leading-[22px] text-center mt-0"
+            className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center mt-0"
             style={{ letterSpacing: '-0.466px' }}
           >
             ✨ 지나쳤던 일상 속 사랑의 순간을 떠올려보세요 ✨

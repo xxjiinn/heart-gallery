@@ -8,8 +8,12 @@ interface HeartCardProps {
 
 export function HeartCard({ memory, index }: HeartCardProps) {
 
-  const columnIndex = index % 4;                
-  const rowIndex = Math.floor(index / 4);       
+  // 데스크탑: 4열 그리드, 모바일: 2열 그리드
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const columns = isMobile ? 2 : 4;
+
+  const columnIndex = index % columns;
+  const rowIndex = Math.floor(index / columns);
 
   const startWithImage = (rowIndex + columnIndex) % 2 === 0;
 
@@ -79,26 +83,26 @@ export function HeartCard({ memory, index }: HeartCardProps) {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '0.2em',
-                fontSize: '1.5px',
+                padding: '0.3em',
+                fontSize: '1.8px',
                 fontFamily:
                   '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
                 fontWeight: 700,
                 color: '#1f2937',
                 textAlign: 'center',
-                lineHeight: '1.3',
+                lineHeight: '1.5',
                 wordBreak: 'keep-all',
                 overflowWrap: 'break-word',
                 overflow: 'hidden',
-                gap: '0.5em',
+                gap: '0.6em',
               }}
             >
               {memory.nickname && (
-                <div style={{ fontSize: '1.3px', fontWeight: 600, color: '#6b7280' }}>
+                <div style={{ fontSize: '1.5px', fontWeight: 600, color: '#6b7280', lineHeight: '1.4' }}>
                   {memory.nickname}
                 </div>
               )}
-              <div>{memory.message}</div>
+              <div style={{ lineHeight: '1.5' }}>{memory.message}</div>
             </div>
           </foreignObject>
         </g>
