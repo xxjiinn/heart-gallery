@@ -66,10 +66,10 @@ export function HeartCard({ memory, index }: HeartCardProps) {
 
           {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
-            x="4"
-            y="7"
-            width="16"
-            height="9"
+            x="3"
+            y="6"
+            width="18"
+            height="11"
             style={{
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.5s ease-in-out',

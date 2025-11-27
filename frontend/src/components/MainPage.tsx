@@ -87,24 +87,24 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
             />
 
             {/* Nickname */}
-            <div className="mt-4 md:mt-6 space-y-1 w-full flex flex-col items-center">
+            <div className="mt-5 md:mt-7 space-y-1 w-full flex flex-col items-center">
               <input
                 type="text"
                 value={nickname}
                 onChange={handleNicknameChange}
                 placeholder="닉네임을 입력해주세요 (10자 이내)"
-                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-3 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+                className="w-full md:w-[600px] px-4 py-2 md:px-4 md:py-3 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
               />
             </div>
 
             {/* Message */}
-            <div className="mt-3 md:mt-3 space-y-1 w-full flex flex-col items-center">
+            <div className="mt-2 md:mt-2 space-y-1 w-full flex flex-col items-center">
               <input
                 type="text"
                 value={message}
                 onChange={handleMessageChange}
                 placeholder="짧은 설명 문구를 작성해보세요 (30자 이내)"
-                className="w-full md:w-[600px] px-4 py-3 md:px-5 md:py-4 md:pt-4 md:pb-6 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+                className="w-full md:w-[600px] px-4 py-3 md:px-4 md:py-4 md:pt-4 md:pb-6 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
               />
               <div className="w-full md:w-[600px] mx-auto text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
                 {message.length} / {maxMessageChars}
