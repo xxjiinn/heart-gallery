@@ -74,7 +74,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             <div className="text-center">
               <Heart className="w-20 h-20 text-[#FFB5D8]/30 mx-auto mb-4" />
               <p className="text-[#C8B6FF] opacity-60">
-                No memories yet. Create your first heart memory!
+                No memories yet. Create your first heart memory!!
               </p>
             </div>
           </div>
