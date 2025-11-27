@@ -45,7 +45,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
     }
   };
 
-  const isSaveDisabled = !uploadedFile || !message.trim();
+  const isSaveDisabled = !uploadedFile || !nickname.trim() || !message.trim();
 
   return (
     <div className="h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh] overflow-hidden">
@@ -54,21 +54,21 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         {/* Header Bar */}
         <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
           <div className="flex items-center gap-[11px]">
-            <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
-            <h1 className="text-[#A381FF] font-semibold text-[20px] leading-[24px] w-[100px] text-center">
+            <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
+            <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[85px] md:w-[100px] text-center">
               아!愛 모먼트
             </h1>
-            <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
+            <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
           </div>
         </div>
 
         {/* Subtitle */}
         <div className="text-center mt-4 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
           <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
-            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[14px] md:text-[16px] leading-[20px] md:leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
               "아! 이건 틀림 없이 사랑이다!"
             </p>
-            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] leading-[22px] text-center mt-0" style={{ letterSpacing: '-0.466px' }}>
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[14px] md:text-[16px] leading-[20px] md:leading-[22px] text-center mt-0" style={{ letterSpacing: '-0.466px' }}>
               ✨ 지나쳤던 일상 속 사랑의 순간을 떠올려보세요 ✨
             </p>
           </div>
@@ -104,7 +104,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
                 value={message}
                 onChange={handleMessageChange}
                 placeholder="짧은 설명 문구를 작성해보세요 (30자 이내)"
-                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-4 md:pt-4 md:pb-6 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
               />
               <div className="w-full md:w-[600px] mx-auto text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
                 {message.length} / {maxMessageChars}
