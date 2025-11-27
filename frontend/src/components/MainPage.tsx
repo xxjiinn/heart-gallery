@@ -63,7 +63,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
         </div>
 
         {/* Subtitle */}
-        <div className="text-center mt-4 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
+        <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
           <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
             <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[14px] md:text-[16px] leading-[20px] md:leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
               "아! 이건 틀림 없이 사랑이다!"
@@ -104,7 +104,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
                 value={message}
                 onChange={handleMessageChange}
                 placeholder="짧은 설명 문구를 작성해보세요 (30자 이내)"
-                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-4 md:pt-4 md:pb-6 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+                className="w-full md:w-[600px] px-4 py-3 md:px-5 md:py-4 md:pt-4 md:pb-6 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
               />
               <div className="w-full md:w-[600px] mx-auto text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
                 {message.length} / {maxMessageChars}
@@ -121,7 +121,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
               onClick={handleSave}
               disabled={isSaveDisabled}
               className={`
-                w-full md:w-[500px] py-5 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
+                w-full md:w-[500px] py-6 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
                 ${isSaveDisabled
                   ? 'bg-gray-300 hover:bg-gray-300/90'
                   : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'}
@@ -134,7 +134,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
             <Button
               onClick={onViewGallery}
               variant="outline"
-              className="w-full md:w-[500px] py-5 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-base md:text-base"
+              className="w-full md:w-[500px] py-6 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-base md:text-base"
             >
               갤러리 보기
             </Button>
