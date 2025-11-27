@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        arita: ['Arita Buri KR', 'serif'], 
+        pretendard: ['Pretendard Variable', 'sans-serif'],
       },
     },
   },

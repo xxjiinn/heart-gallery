@@ -23,7 +23,7 @@ export class MemoriesService {
     });
   }
 
-  async create(imageData: string, message: string) {
+  async create(imageData: string, nickname: string, message: string) {
     // base64 데이터에서 실제 데이터 부분만 추출
     // 형식: "data:image/png;base64,iVBORw0KGgo..."
     const matches = imageData.match(/^data:(.+);base64,(.+)$/);
@@ -50,6 +50,7 @@ export class MemoriesService {
     const saved = await this.prisma.heartMemory.create({
       data: {
         imageUrl,
+        nickname: nickname || '',
         message,
       },
     });

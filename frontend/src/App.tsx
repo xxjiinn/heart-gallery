@@ -98,7 +98,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen fixed inset-0 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 50%, #E0D4FF 100%)' }}>
+    <div className="min-h-screen fixed inset-0 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 70%, #E0D4FF 110%)' }}>
       <div className="h-full overflow-y-auto">
         <Routes>
           <Route

@@ -1,8 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Ensure Arita Buri KR font loads properly on mobile */
-.font-arita {
-  font-family: 'Arita Buri KR', serif !important;
-}

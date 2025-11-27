@@ -24,6 +24,7 @@ export class UploadController {
     const saved = await this.prisma.heartMemory.create({    // Prisma Client를 사용하여 MySQL 데이터베이스의 HeartMemory 테이블에 새로운 레코드(기록)를 생성하고 저장하는 메서드 호출. SpringBoot에서 "heartMemoryRepository.save(new HeartMemory(...))"와 정확히 같은 역할을 한다.
       data: {
         imageUrl: file.location,
+        nickname: body.nickname || '',
         message: body.message,
       },
     });

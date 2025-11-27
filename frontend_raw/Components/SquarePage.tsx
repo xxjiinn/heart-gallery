@@ -12,31 +12,38 @@ interface SquarePageProps {
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <div className="relative z-10 p-4 md:p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6 bg-white/40 backdrop-blur-sm rounded-2xl p-4 shadow-lg shadow-[#FFB5D8]/20">
-            <Button
-              onClick={onBackToMain}
-              variant="ghost"
-              className="text-[#C8B6FF] hover:bg-white/40 rounded-2xl"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back
-            </Button>
-            
-            <div className="flex items-center gap-2">
-              <Heart className="w-6 h-6 text-[#FFB5D8] fill-[#FFB5D8]" />
-              <h2 className="text-[#C8B6FF]">Memory Gallery</h2>
-            </div>
-            
-            <div className="w-20"></div>
+      {/* Header Bar */}
+      <div className="fixed top-0 left-0 right-0 z-30 flex justify-center px-4 md:px-8 pt-4">
+        <div className="w-full max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] 
+                        shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
+                        flex items-center justify-between px-4 md:px-8 relative">
+
+          {/* Back Button */}
+          <button 
+            onClick={onBackToMain}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors z-20"
+          >
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="text-[#88878A] font-semibold text-sm md:text-base">Back</span>
+          </button>
+
+          {/* Center Title */}
+          <div className="flex items-center gap-[11px] absolute left-1/2 -translate-x-1/2 z-10">
+            <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
+            <h1 className="text-[#A381FF] font-semibold text-[20px] leading-[24px]">
+              아!愛 모먼트
+            </h1>
+            <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
           </div>
+
+          {/* 오른쪽 여백 (Back 버튼과 균형용) */}
+          <div className="w-[60px] md:w-[80px]"></div>
+
         </div>
       </div>
 
       {/* Grid Container */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[120px] md:pt-[150px] pb-20">
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="animate-pulse text-center">

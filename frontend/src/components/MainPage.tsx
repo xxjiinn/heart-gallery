@@ -11,8 +11,10 @@ interface MainPageProps {
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [nickname, setNickname] = useState('');
   const [message, setMessage] = useState('');
-  const maxChars = 30;
+  const maxNicknameChars = 10;
+  const maxMessageChars = 30;
 
   const handleImageUpload = (file: File, previewUrl: string) => {
     setUploadedFile(file);
@@ -24,85 +26,121 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
       onSave(uploadedFile, message);
       setUploadedFile(null);
       setUploadedImage(null);
+      setNickname('');
       setMessage('');
+    }
+  };
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length <= maxNicknameChars) {
+      setNickname(value);
     }
   };
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length <= maxChars) {
+    if (value.length <= maxMessageChars) {
       setMessage(value);
     }
   };
-  
-  // 버튼 활성화 여부
+
   const isSaveDisabled = !uploadedFile || !message.trim();
 
-  // 화면에 렌더링할 UI를 반환.
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start md:justify-center pt-6 md:pt-8 px-6 md:px-8 pb-8">
-      <div className="w-full max-w-sm md:max-w-4xl">
-        {/* Header */}
-        <div className="text-center mb-3 md:mb-3 md:mt-0">
-          <div className="flex items-center justify-center gap-5 mb-3 md:mb-4">
-            <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
-            <h1 className="text-[#AC91FF] font-arita font-bold text-xl md:text-2xl">아!愛 모먼트</h1>
-            <Heart className="w-6 h-6 md:w-8 md:h-8 text-[#FFB5D8] fill-[#FFB5D8]" />
+    <div className="h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh] overflow-hidden">
+      <div className="w-full flex flex-col items-center h-full">
+
+        {/* Header Bar */}
+        <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
+          <div className="flex items-center gap-[11px]">
+            <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
+            <h1 className="text-[#A381FF] font-semibold text-[20px] leading-[24px] w-[100px] text-center">
+              아!愛 모먼트
+            </h1>
+            <Heart className="w-[24px] h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
           </div>
-          <p className="text-[#6634FF] opacity-60 md:opacity-80 font-arita font-bold md:mt-3 text-base md:text-base">
-            사랑이 묻어났던 순간을
-          </p>
-          <p className="text-[#6634FF] opacity-60 md:opacity-80 font-arita font-bold text-base md:text-base">
-            '아! 모먼트'로 간직해보세요✨
-          </p>
         </div>
 
-        {/* Upload Area */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-5 shadow-lg shadow-[#FFB5D8]/20 mb-2 md:mb-4">
-          <HeartUpload
-            onImageUpload={handleImageUpload}
-            uploadedImage={uploadedImage}
-          />
+        {/* Subtitle */}
+        <div className="text-center mt-4 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
+          <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] leading-[22px] text-center" style={{ letterSpacing: '-0.466px' }}>
+              "아! 이건 틀림 없이 사랑이다!"
+            </p>
+            <p className="font-[Pretendard Variable] font-semibold text-[#8C66FF] text-[16px] leading-[22px] text-center mt-0" style={{ letterSpacing: '-0.466px' }}>
+              ✨ 지나쳤던 일상 속 사랑의 순간을 떠올려보세요 ✨
+            </p>
+          </div>
+        </div>
 
-          {/* Message Input */}
-          <div className="mt-6 md:mt-5 space-y-1">
-            <input
-              type="text"
-              value={message}
-              onChange={handleMessageChange}
-              placeholder="짧은 설명 문구를 작성해보세요. (30자 이내)"
-              className="w-full px-4 py-2.5 md:px-6 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] focus:outline-none transition-colors placeholder:text-[#AC91FF] text-sm md:text-base"
+
+        {/* Content Container */}
+        <div className="w-full max-w-md md:max-w-[900px] mx-auto px-0 flex-1 flex flex-col min-h-0">
+
+          {/* Upload Area */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-4 shadow-lg shadow-[#FFB5D8]/20 mb-2 md:mb-3 flex-shrink-0 flex flex-col items-center">
+            
+            <HeartUpload
+              onImageUpload={handleImageUpload}
+              uploadedImage={uploadedImage}
             />
-            <div className="text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
-              {message.length} / {maxChars}
+
+            {/* Nickname */}
+            <div className="mt-4 md:mt-6 space-y-1 w-full flex flex-col items-center">
+              <input
+                type="text"
+                value={nickname}
+                onChange={handleNicknameChange}
+                placeholder="닉네임을 입력해주세요 (10자 이내)"
+                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-3 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+              />
             </div>
+
+            {/* Message */}
+            <div className="mt-3 md:mt-3 space-y-1 w-full flex flex-col items-center">
+              <input
+                type="text"
+                value={message}
+                onChange={handleMessageChange}
+                placeholder="짧은 설명 문구를 작성해보세요 (30자 이내)"
+                className="w-full md:w-[600px] px-4 py-2 md:px-5 md:py-4 rounded-2xl bg-white/80 border-2 border-[#FFE5F1] focus:border-[#FFB5D8] placeholder:text-[#AC91FF] text-sm md:text-base mx-auto"
+              />
+              <div className="w-full md:w-[600px] mx-auto text-right text-[#C8B6FF] opacity-60 text-xs md:text-sm">
+                {message.length} / {maxMessageChars}
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="flex flex-col items-center gap-2 md:gap-3">
-          <Button
-            onClick={handleSave}
-            disabled={isSaveDisabled}
-            className={`
-              w-full md:w-[600px] py-4 md:py-5 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
-              ${isSaveDisabled
-                ? 'bg-gray-300 hover:bg-gray-300/90'
-                : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'
-              }
-            `}
-          >
-            <Heart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-            순간을 간직하기
-          </Button>
 
-          <Button
-            onClick={onViewGallery}
-            variant="outline"
-            className="w-full md:w-[600px] py-4 md:py-5 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
-          >
-            갤러리 보기
-          </Button>
+          {/* Actions (네모박스 밖) */}
+          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 flex-shrink-0">
+            
+            <Button
+              onClick={handleSave}
+              disabled={isSaveDisabled}
+              className={`
+                w-full md:w-[500px] py-3.5 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
+                ${isSaveDisabled
+                  ? 'bg-gray-300 hover:bg-gray-300/90'
+                  : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'}
+              `}
+            >
+              <Heart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+              순간을 간직하기
+            </Button>
+
+            <Button
+              onClick={onViewGallery}
+              variant="outline"
+              className="w-full md:w-[500px] py-3.5 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+            >
+              갤러리 보기
+            </Button>
+
+          </div>
+
         </div>
       </div>
     </div>
