@@ -116,25 +116,25 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
           {/* Actions (네모박스 밖) */}
           <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 flex-shrink-0">
-            
+
             <Button
               onClick={handleSave}
               disabled={isSaveDisabled}
               className={`
-                w-full md:w-[500px] py-3.5 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-sm md:text-base
+                w-full md:w-[500px] py-5 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
                 ${isSaveDisabled
                   ? 'bg-gray-300 hover:bg-gray-300/90'
                   : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'}
               `}
             >
-              <Heart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+              <Heart className="w-5 h-5 md:w-5 md:h-5 mr-2" />
               순간을 간직하기
             </Button>
 
             <Button
               onClick={onViewGallery}
               variant="outline"
-              className="w-full md:w-[500px] py-3.5 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-sm md:text-base"
+              className="w-full md:w-[500px] py-5 md:py-6 rounded-2xl border-2 border-[#C8B6FF] text-[#C8B6FF] bg-white hover:bg-[#C8B6FF]/10 text-base md:text-base"
             >
               갤러리 보기
             </Button>
