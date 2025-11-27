@@ -23,7 +23,7 @@ export function HeartCard({ memory, index }: HeartCardProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setShowImage(prev => !prev);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -63,9 +63,9 @@ export function HeartCard({ memory, index }: HeartCardProps) {
           {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
             x="4"
-            y="8"
+            y="7"
             width="16"
-            height="7"
+            height="9"
             style={{
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.5s ease-in-out',
@@ -90,7 +90,7 @@ export function HeartCard({ memory, index }: HeartCardProps) {
                 wordBreak: 'keep-all',
                 overflowWrap: 'break-word',
                 overflow: 'hidden',
-                gap: '0.3em',
+                gap: '0.5em',
               }}
             >
               {memory.nickname && (
