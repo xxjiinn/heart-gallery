@@ -60,7 +60,7 @@ export function HeartCard({ memory, index }: HeartCardProps) {
             }}
           />
 
-          {/* 메시지 (페이드 트랜지션 적용)*/}
+          {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
             x="4"
             y="8"
@@ -76,6 +76,7 @@ export function HeartCard({ memory, index }: HeartCardProps) {
                 width: '100%',
                 height: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '0.2em',
@@ -89,9 +90,15 @@ export function HeartCard({ memory, index }: HeartCardProps) {
                 wordBreak: 'keep-all',
                 overflowWrap: 'break-word',
                 overflow: 'hidden',
+                gap: '0.3em',
               }}
             >
-              {memory.message}
+              {memory.nickname && (
+                <div style={{ fontSize: '1.3px', fontWeight: 600, color: '#6b7280' }}>
+                  {memory.nickname}
+                </div>
+              )}
+              <div>{memory.message}</div>
             </div>
           </foreignObject>
         </g>

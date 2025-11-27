@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
 
 interface MainPageProps {
-  onSave: (file: File, message: string) => void;
+  onSave: (file: File, nickname: string, message: string) => void;
   onViewGallery: () => void;
 }
 
@@ -23,7 +23,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
   const handleSave = () => {
     if (uploadedFile && message.trim()) {
-      onSave(uploadedFile, message);
+      onSave(uploadedFile, nickname, message);
       setUploadedFile(null);
       setUploadedImage(null);
       setNickname('');
