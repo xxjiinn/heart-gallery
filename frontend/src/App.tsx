@@ -136,7 +136,7 @@ export default function App() {
       {/* Loading Modal */}
       {isSaving && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-[280px] md:max-w-sm w-full text-center shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 max-w-[240px] md:max-w-[340px] w-full text-center shadow-2xl">
             <div className="w-16 h-16 border-4 border-[#C8B6FF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <h2 className="text-xl font-bold text-[#9747FF]">저장 중...</h2>
           </div>
@@ -146,7 +146,7 @@ export default function App() {
       {/* Success Modal */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-[280px] md:max-w-sm w-full text-center shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 max-w-[240px] md:max-w-[340px] w-full text-center shadow-2xl">
             <div className="w-16 h-16 bg-[#9747FF] rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />

@@ -53,7 +53,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         {/* Center Title */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[11px]">
           <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
-          <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[130px] md:w-[160px] text-center">
+          <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[135px] md:w-[160px] text-center">
             아!愛 모먼트 갤러리
           </h1>
           <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
