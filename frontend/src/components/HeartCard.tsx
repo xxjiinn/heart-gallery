@@ -90,7 +90,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             width="24"
             height="24"
             preserveAspectRatio="xMidYMid slice"
-            decoding="async"
             style={{
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
