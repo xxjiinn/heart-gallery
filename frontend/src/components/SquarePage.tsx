@@ -124,6 +124,10 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         ) : (
           <div
             className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
+            style={{
+              contain: 'layout style',
+              willChange: 'scroll-position',
+            }}
           >
             {memories.map((memory, index) => (
               <HeartCard

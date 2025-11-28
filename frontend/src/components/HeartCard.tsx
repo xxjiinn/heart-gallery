@@ -49,6 +49,10 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   return (
     <div
       className="flex items-center justify-center cursor-pointer"
+      style={{
+        contain: 'layout style paint',
+        contentVisibility: 'auto'
+      }}
       onClick={(e) => {
         onClick?.();
       }}
@@ -66,6 +70,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
           transform: 'translateZ(0)',
           pointerEvents: 'none',
         }}
+        shapeRendering="optimizeSpeed"
       >
         <defs>
           <clipPath id={`heartClip-${memory.id}`}>
@@ -90,6 +95,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             width="24"
             height="24"
             preserveAspectRatio="xMidYMid slice"
+            decoding="async"
             style={{
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
@@ -132,6 +138,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
                 overflow: 'hidden',
                 gap: '0.6em',
                 WebkitFontSmoothing: 'antialiased',
+                contain: 'layout style paint',
               }}
             >
               {memory.nickname && (
