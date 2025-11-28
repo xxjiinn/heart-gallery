@@ -123,7 +123,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
               willChange: 'opacity',
-              imageRendering: 'optimizeSpeed',
+              imageRendering: 'auto' as const,
             }}
           />
 
