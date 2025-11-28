@@ -104,6 +104,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
               transition: 'opacity 0.7s ease-in-out',
               pointerEvents: 'none',
               willChange: 'opacity',
+              overflow: 'hidden',
             }}
           >
             <div
