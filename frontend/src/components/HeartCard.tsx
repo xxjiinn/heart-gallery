@@ -41,7 +41,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
       setTimeout(() => {
         setShowImage(prev => !prev);
         setIsPreparing(false);
-      }, 300);
+      }, 500);
 
       // 첫 전환 후 5초마다 반복
       const interval = setInterval(() => {
@@ -49,7 +49,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
         setTimeout(() => {
           setShowImage(prev => !prev);
           setIsPreparing(false);
-        }, 300);
+        }, 500);
       }, 5000);
 
       // cleanup을 위해 interval ID를 저장
@@ -88,12 +88,12 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
         className="w-full h-auto aspect-square max-w-[500px]"
         viewBox="0 0 24 24"
         style={{
-          transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
           animation: isLoaded ? `float-${memory.id} ${3 + (index % 3)}s ease-in-out infinite` : 'none',
           animationDelay: `${(index % 5) * 0.2}s`,
           opacity: isLoaded ? 1 : 0,
           transition: 'opacity 0.3s ease-in',
+          willChange: 'transform, opacity',
         }}
       >
         <defs>
