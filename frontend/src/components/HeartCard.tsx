@@ -9,7 +9,7 @@ interface HeartCardProps {
 
 export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   // 데스크탑: 4열 그리드, 모바일: 2열 그리드
-  const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const columns = isMobile ? 2 : 4;
 
   const columnIndex = index % columns;
