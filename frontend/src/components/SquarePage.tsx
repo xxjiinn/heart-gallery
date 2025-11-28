@@ -59,7 +59,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center"
             style={{ letterSpacing: '-0.466px' }}
           >
-            "아! 이건 틀림 없이 사랑이다!!!"
+            "아! 이건 틀림 없이 사랑이다!"
           </p>
           <p
             className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center mt-0"

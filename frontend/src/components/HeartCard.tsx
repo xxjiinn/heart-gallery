@@ -73,7 +73,13 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   }, [isLoaded]);
 
   return (
-    <div className="flex items-center justify-center">
+    <div
+      className="flex items-center justify-center cursor-pointer"
+      onClick={(e) => {
+        console.log('HeartCard clicked!', memory.id);
+        onClick?.();
+      }}
+    >
       <style>{`
         @keyframes float-${memory.id} {
           0%, 100% {
@@ -89,11 +95,15 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
         viewBox="0 0 24 24"
         style={{
           backfaceVisibility: 'hidden',
-          animation: isLoaded ? `float-${memory.id} ${3 + (index % 3)}s ease-in-out infinite` : 'none',
+          animationName: isLoaded ? `float-${memory.id}` : 'none',
+          animationDuration: `${3 + (index % 3)}s`,
+          animationTimingFunction: 'ease-in-out',
+          animationIterationCount: 'infinite',
           animationDelay: `${(index % 5) * 0.2}s`,
           opacity: isLoaded ? 1 : 0,
           transition: 'opacity 0.3s ease-in',
           willChange: 'transform, opacity',
+          pointerEvents: 'none',
         }}
       >
         <defs>
@@ -106,7 +116,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
           </filter>
         </defs>
 
-        <g clipPath={`url(#heartClip-${memory.id})`} onClick={onClick} style={{ cursor: 'pointer' }}>
+        <g clipPath={`url(#heartClip-${memory.id})`}>
 
           {!showImage && (
             <rect x="0" y="0" width="24" height="24" fill="white" />
@@ -161,7 +171,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
                 overflow: 'hidden',
                 gap: '0.6em',
                 WebkitFontSmoothing: 'antialiased',
-                transform: 'translateZ(0)',
               }}
             >
               {memory.nickname && (
