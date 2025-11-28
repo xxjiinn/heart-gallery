@@ -91,14 +91,12 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
         viewBox="0 0 24 24"
         style={{
           backfaceVisibility: 'hidden',
-          animationName: isLoaded ? `float-${memory.id}` : 'none',
+          animationName: `float-${memory.id}`,
           animationDuration: `${3 + (index % 3)}s`,
           animationTimingFunction: 'ease-in-out',
           animationIterationCount: 'infinite',
           animationDelay: `${(index % 5) * 0.2}s`,
-          opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease-in',
-          willChange: 'transform, opacity',
+          willChange: 'transform',
           pointerEvents: 'none',
         }}
       >
