@@ -42,6 +42,12 @@ export default function App() {
 
       const data = await response.json();   // 서버로부터 받은 JSON 응답 본문을 Javascript 객체로 변환한다.
       setMemories(data);    // 단순한 변수 대입이 아니라, React 시스템에 "데이터가 바뀌었으니 화면을 다시 그려라"는 신호를 보내는 것이다.
+
+      // 모든 이미지 프리로드
+      data.forEach((memory: HeartMemory) => {
+        const img = new Image();
+        img.src = memory.imageUrl;
+      });
     } catch (error) {
       console.error('Error fetching memories:', error);
       setMemories([]);
