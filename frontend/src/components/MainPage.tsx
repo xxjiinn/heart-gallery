@@ -115,7 +115,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
 
           {/* Actions (네모박스 밖) */}
-          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 flex-shrink-0">
+          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 flex-shrink-0 pb-8">
 
             <Button
               onClick={handleSave}

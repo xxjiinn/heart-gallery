@@ -134,7 +134,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
               style={{
                 maxWidth: '1792px',
                 margin: '0 auto',
-                paddingBottom: '4px',
+                paddingBottom: rowIndex === rows.length - 1 ? '80px' : '4px',
                 paddingLeft: '8px',
                 paddingRight: '8px',
               }}
