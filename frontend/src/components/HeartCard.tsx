@@ -110,9 +110,9 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
           {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
-            x="2.5"
+            x="2.2"
             y="4.5"
-            width="19"
+            width="19.6"
             height="14"
             style={{
               opacity: showImage ? 0 : 1,
