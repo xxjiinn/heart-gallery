@@ -56,7 +56,14 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   return (
     <div className="flex items-center justify-center">
-      <svg className="w-full h-auto aspect-square max-w-[500px]" viewBox="0 0 24 24">
+      <svg
+        className="w-full h-auto aspect-square max-w-[500px]"
+        viewBox="0 0 24 24"
+        style={{
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+        }}
+      >
         <defs>
           <clipPath id={`heartClip-${memory.id}`}>
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -84,6 +91,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
               willChange: 'opacity',
+              imageRendering: 'optimizeSpeed',
             }}
           />
 
@@ -120,6 +128,8 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
                 overflowWrap: 'break-word',
                 overflow: 'hidden',
                 gap: '0.6em',
+                WebkitFontSmoothing: 'antialiased',
+                transform: 'translateZ(0)',
               }}
             >
               {memory.nickname && (

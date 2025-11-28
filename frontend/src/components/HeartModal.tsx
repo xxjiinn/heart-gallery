@@ -13,7 +13,7 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+        className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -29,11 +29,11 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
         {/* Content */}
         <div className="px-8 pb-8 flex flex-col items-center gap-6">
           {/* Original Image */}
-          <div className="w-full max-w-[320px]">
+          <div className="w-full max-w-[320px] max-h-[400px] flex items-center justify-center">
             <img
               src={memory.imageUrl}
               alt="Memory"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full h-auto max-h-[400px] object-contain rounded-2xl shadow-lg"
             />
           </div>
 
