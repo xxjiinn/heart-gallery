@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -19,12 +19,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
-
-  // foreignObject 좌표 (모바일과 데스크탑 구분)
-  const foreignX = isMobile ? "3" : "2.2";
-  const foreignY = isMobile ? "5" : "4.5";
-  const foreignWidth = isMobile ? "18" : "19.6";
-  const foreignHeight = isMobile ? "13" : "14";
 
   useEffect(() => {
     // 첫 번째 전환: 3초 후
@@ -51,80 +45,95 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
     return () => clearInterval(interval);
   }, []);
 
+  // Heart shape for clip-path
+  const heartPath = `path('M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z')`;
+
   return (
     <div
-      className="flex items-center justify-center cursor-pointer"
+      className="flex items-center justify-center cursor-pointer relative"
       onClick={(e) => {
         onClick?.();
       }}
+      style={{
+        aspectRatio: '1',
+        maxWidth: '500px',
+        width: '100%',
+      }}
     >
-      <svg
-        className="w-full h-auto aspect-square max-w-[500px]"
-        viewBox="0 0 24 24"
-        preserveAspectRatio="xMidYMid meet"
+      <style>{`
+        @keyframes float-${memory.id} {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+      `}</style>
+
+      {/* Main container with clip-path */}
+      <div
         style={{
-          backfaceVisibility: 'hidden',
-          animationName: `float-${memory.id}`,
-          animationDuration: `${3 + (index % 3)}s`,
-          animationTimingFunction: 'ease-in-out',
-          animationIterationCount: 'infinite',
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          animation: `float-${memory.id} ${3 + (index % 3)}s ease-in-out infinite`,
           animationDelay: `${(index % 5) * 0.2}s`,
-          transform: 'translateZ(0)',
         }}
       >
-        <defs>
-          <clipPath id={`heartClip-${memory.id}`}>
-            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-          </clipPath>
-        </defs>
-
-        <g clipPath={`url(#heartClip-${memory.id})`}>
-
+        {/* Content wrapper with heart clip */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            clipPath: heartPath,
+            WebkitClipPath: heartPath,
+          }}
+        >
+          {/* Background white */}
           {!showImage && (
-            <rect x="0" y="0" width="24" height="24" fill="white" />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: 'white',
+              }}
+            />
           )}
-          {/* 이미지 (페이드 트랜지션 적용)*/}
-          <image
-            href={memory.imageUrl}
-            x="0"
-            y="0"
-            width="24"
-            height="24"
-            preserveAspectRatio="xMidYMid slice"
+
+          {/* Image layer */}
+          <img
+            src={memory.imageUrl}
+            alt={memory.nickname}
             style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
-              willChange: 'opacity',
-              imageRendering: 'auto' as const,
             }}
           />
 
-          {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
-          <foreignObject
-            x={foreignX}
-            y={foreignY}
-            width={foreignWidth}
-            height={foreignHeight}
+          {/* Text layer */}
+          <div
             style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '15%',
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.7s ease-in-out',
               pointerEvents: 'none',
-              willChange: 'opacity',
-              overflow: 'hidden',
             }}
           >
             <div
               style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0.3em',
-                fontSize: '1.8px',
-                fontFamily:
-                  '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
+                fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
                 fontWeight: 700,
                 color: '#1f2937',
                 textAlign: 'center',
@@ -132,32 +141,42 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
                 wordBreak: 'keep-all',
                 overflowWrap: 'break-word',
                 overflow: 'hidden',
-                gap: '0.6em',
-                WebkitFontSmoothing: 'antialiased',
-                contain: 'layout style paint',
+                fontSize: isMobile ? '0.75rem' : '0.875rem',
               }}
             >
               {memory.nickname && (
-                <div style={{ fontSize: '1.5px', fontWeight: 600, color: '#6b7280', lineHeight: '1.4' }}>
+                <div style={{ fontWeight: 600, color: '#6b7280', marginBottom: '0.5em', fontSize: '0.9em' }}>
                   {memory.nickname}
                 </div>
               )}
-              <div style={{ lineHeight: '1.5' }}>{memory.message}</div>
+              <div>{memory.message}</div>
             </div>
-          </foreignObject>
-        </g>
+          </div>
+        </div>
 
-        {/* Border */}
-        <path
-          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-          fill="none"
-          stroke="#FFCCE4"
-          strokeWidth={strokeWidth}
+        {/* Border (SVG overlay) */}
+        <svg
           style={{
-            transition: 'stroke-width 1.0s ease-in-out',
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
           }}
-        />
-      </svg>
+          viewBox="0 0 24 24"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <path
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+            fill="none"
+            stroke="#FFCCE4"
+            strokeWidth={strokeWidth}
+            style={{
+              transition: 'stroke-width 1.0s ease-in-out',
+            }}
+          />
+        </svg>
+      </div>
     </div>
   );
 }
