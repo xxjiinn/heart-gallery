@@ -134,7 +134,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             width="18"
             height="11"
             style={{
-              opacity: showImage ? 0 : (isPreparing && showImage ? 0.01 : 1),
+              opacity: showImage ? 0 : (isPreparing && !showImage ? 0.01 : 1),
               transition: 'opacity 0.7s ease-in-out',
               pointerEvents: 'none',
               willChange: 'opacity',
