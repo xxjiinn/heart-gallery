@@ -20,18 +20,14 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true); // 즉시 표시
   const [isPreparing, setIsPreparing] = useState(false);
 
   useEffect(() => {
     const preloadImg = new Image();
     preloadImg.src = memory.imageUrl;
     preloadImg.loading = 'eager';
-    preloadImg.onload = () => {
-      // 이미지 로드 완료 후 약간의 지연을 주고 애니메이션 시작
-      setTimeout(() => setIsLoaded(true), index * 50); // 각 카드마다 50ms 차이
-    };
-  }, [memory.imageUrl, index]);
+  }, [memory.imageUrl]);
 
   useEffect(() => {
     // 첫 번째 전환: 3초 후
@@ -139,10 +135,10 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
           {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
-            x="3"
-            y="6"
-            width="18"
-            height="11"
+            x="2.5"
+            y="4.5"
+            width="19"
+            height="14"
             style={{
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.7s ease-in-out',
