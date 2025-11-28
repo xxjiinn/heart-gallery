@@ -20,13 +20,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
-  const [isLoaded, setIsLoaded] = useState(true); // 즉시 표시
-
-  useEffect(() => {
-    const preloadImg = new Image();
-    preloadImg.src = memory.imageUrl;
-    preloadImg.loading = 'eager';
-  }, [memory.imageUrl]);
 
   useEffect(() => {
     // 첫 번째 전환: 3초 후
@@ -46,19 +39,17 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   }, []);
 
   useEffect(() => {
-    // 이미지가 로드된 후에만 strokeWidth 애니메이션 시작
-    if (!isLoaded) return;
-
     const interval = setInterval(() => {
       setStrokeWidth(prev => prev === 0.3 ? 1.0 : 0.3);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isLoaded]);
+  }, []);
 
   return (
     <div
       className="flex items-center justify-center cursor-pointer"
+      style={{ contentVisibility: 'auto' }}
       onClick={(e) => {
         onClick?.();
       }}
