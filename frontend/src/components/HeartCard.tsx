@@ -140,7 +140,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             alignItems: 'center',
             justifyContent: 'center',
             padding: isMobile ? '20%' : '30%',
-            paddingTop: isMobile ? '20%' : '25%',
+            paddingTop: isMobile ? '18%' : '25%',
             opacity: showImage ? 0 : 1,
             transition: 'opacity 0.7s ease-in-out',
             pointerEvents: 'none',
@@ -157,7 +157,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
               overflowWrap: 'break-word',
               overflow: 'hidden',
               width: '100%',
-              fontSize: isMobile ? '0.8rem' : '1.3rem',
+              fontSize: isMobile ? '0.85rem' : '1.3rem',
             }}
           >
             {memory.nickname && (
