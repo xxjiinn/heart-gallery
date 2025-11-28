@@ -48,7 +48,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
   }, [memories, columns]);
 
   return (
-    <div className="h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 70%, #E0D4FF 110%)' }}>
       {/* Global animations for all hearts */}
       <style>{`
         ${memories.map((memory) => `
@@ -67,10 +67,12 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           animation-play-state: paused !important;
         }
       `}</style>
-      {/* Header Bar */}
-      <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
-                      shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
-                      flex items-center justify-between px-4 md:px-8 flex-shrink-0 relative">
+
+      {/* Header Bar - Fixed */}
+      <div className="flex-shrink-0 flex items-center justify-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw]">
+        <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
+                        shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
+                        flex items-center justify-between px-4 md:px-8">
 
         {/* Left: Back Button */}
         <button 
@@ -90,14 +92,13 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
         </div>
 
-        {/* Title과 좌우 균형을 맞추기 위한 빈 칸 */}
-        <div className="w-[60px] md:w-[80px]"></div>
-
+          {/* Title과 좌우 균형을 맞추기 위한 빈 칸 */}
+          <div className="w-[60px] md:w-[80px]"></div>
+        </div>
       </div>
 
-
-      {/* Subtitle (페이지1과 동일하게 적용) */}
-      <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] flex-shrink-0">
+      {/* Subtitle */}
+      <div className="flex-shrink-0 text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] px-6 md:px-[2.85vw]">
         <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
           <p
             className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center"
@@ -115,52 +116,57 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
       </div>
 
 
-      {/* ░░ Grid 영역 ░░ */}
-      <div className="w-full max-w-7xl mx-auto flex-1 px-2 md:px-4 pt-4 md:pt-6" style={{ minHeight: 0 }}>
-        {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="animate-pulse text-center">
-              <Heart className="w-20 h-20 text-[#FFB5D8] fill-[#FFB5D8] mx-auto mb-4" />
-              <p className="text-[#C8B6FF]">Loading memories...</p>
-            </div>
+      {/* ░░ Virtuoso 전체 스크롤 영역 ░░ */}
+      {isLoading ? (
+        <div className="flex-1 flex items-center justify-center">
+          <div className="animate-pulse text-center">
+            <Heart className="w-20 h-20 text-[#FFB5D8] fill-[#FFB5D8] mx-auto mb-4" />
+            <p className="text-[#C8B6FF]">Loading memories...</p>
           </div>
-        ) : memories.length === 0 ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <Heart className="w-20 h-20 text-[#FFB5D8]/30 mx-auto mb-4" />
-              <p className="text-[#C8B6FF] opacity-60">
-                No memories yet. Create your first heart memory!!
-              </p>
-            </div>
+        </div>
+      ) : memories.length === 0 ? (
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <Heart className="w-20 h-20 text-[#FFB5D8]/30 mx-auto mb-4" />
+            <p className="text-[#C8B6FF] opacity-60">
+              No memories yet. Create your first heart memory!!
+            </p>
           </div>
-        ) : (
-          <Virtuoso
-            style={{ height: '100%', width: '100%' }}
-            totalCount={rows.length}
-            onScroll={handleScroll}
-            itemContent={(rowIndex) => (
-              <div
-                className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
-                style={{
-                  paddingBottom: '4px',
-                }}
-              >
-                {rows[rowIndex].map((memory, colIndex) => {
-                  const globalIndex = rowIndex * columns + colIndex;
-                  return (
-                    <HeartCard
-                      key={memory.id}
-                      memory={memory}
-                      index={globalIndex}
-                      onClick={() => handleCardClick(memory)}
-                    />
-                  );
-                })}
+        </div>
+      ) : (
+        <Virtuoso
+          style={{ flex: 1 }}
+          totalCount={rows.length}
+          onScroll={handleScroll}
+          components={{
+            Item: ({ children, ...props }) => (
+              <div {...props} style={{ ...props.style, padding: '0 24px' }}>
+                {children}
               </div>
-            )}
-          />
-        )}
-      </div>
+            ),
+          }}
+          itemContent={(rowIndex) => (
+            <div
+              className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 max-w-7xl mx-auto ${isScrolling ? 'scrolling' : ''}`}
+              style={{
+                paddingBottom: '4px',
+              }}
+            >
+              {rows[rowIndex].map((memory, colIndex) => {
+                const globalIndex = rowIndex * columns + colIndex;
+                return (
+                  <HeartCard
+                    key={memory.id}
+                    memory={memory}
+                    index={globalIndex}
+                    onClick={() => handleCardClick(memory)}
+                  />
+                );
+              })}
+            </div>
+          )}
+        />
+      )}
 
       {/* Modal */}
       {selectedMemory && (
