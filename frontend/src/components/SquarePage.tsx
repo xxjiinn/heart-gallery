@@ -146,11 +146,13 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           }}
           itemContent={(rowIndex) => (
             <div
-              className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 px-2 md:px-4 ${isScrolling ? 'scrolling' : ''}`}
+              className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
               style={{
                 maxWidth: '1792px',
                 margin: '0 auto',
                 paddingBottom: '4px',
+                paddingLeft: '8px',
+                paddingRight: '8px',
               }}
             >
               {rows[rowIndex].map((memory, colIndex) => {

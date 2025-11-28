@@ -20,6 +20,12 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
 
+  // foreignObject 좌표 (모바일과 데스크탑 구분)
+  const foreignX = isMobile ? "3" : "2.2";
+  const foreignY = isMobile ? "5" : "4.5";
+  const foreignWidth = isMobile ? "18" : "19.6";
+  const foreignHeight = isMobile ? "13" : "14";
+
   useEffect(() => {
     // 첫 번째 전환: 3초 후
     const firstTimeout = setTimeout(() => {
@@ -95,10 +101,10 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
           {/* 닉네임 + 메시지 (페이드 트랜지션 적용)*/}
           <foreignObject
-            x="2.2"
-            y="4.5"
-            width="19.6"
-            height="14"
+            x={foreignX}
+            y={foreignY}
+            width={foreignWidth}
+            height={foreignHeight}
             style={{
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.7s ease-in-out',
