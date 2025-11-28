@@ -64,18 +64,17 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
           {/* Nickname Section with Enhanced Design */}
           {memory.nickname && (
             <div className="flex flex-col items-center mb-8">
-              <div className="text-xs text-indigo-400 uppercase tracking-widest mb-3 font-semibold">From</div>
-              <div className="relative group">
-                {/* Animated glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-indigo-300 to-violet-300 rounded-full blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-300"></div>
-
-                <div className="relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 text-white px-8 py-3.5 rounded-full shadow-xl">
-                  <div className="w-8 h-8 rounded-full bg-white/25 backdrop-blur-sm flex items-center justify-center shadow-inner">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
+              <div className="text-xs text-gray-400 uppercase tracking-widest mb-3 font-semibold">Written by</div>
+              <div className="relative">
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-8 py-4 rounded-2xl border-2 border-gray-200 shadow-md">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center shadow-sm">
+                      <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="font-bold text-xl md:text-2xl text-gray-800">{memory.nickname}</span>
                   </div>
-                  <span className="font-bold text-lg md:text-xl tracking-wide drop-shadow-sm">{memory.nickname}</span>
                 </div>
               </div>
             </div>

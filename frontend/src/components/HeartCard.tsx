@@ -144,7 +144,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             alignItems: 'center',
             justifyContent: 'center',
             padding: isMobile ? '20%' : '25%',
-            paddingTop: isMobile ? '15%' : '20%',
+            paddingTop: isMobile ? '13%' : '20%',
             opacity: showImage ? 0 : 1,
             transition: 'opacity 0.7s ease-in-out',
             pointerEvents: 'none',
