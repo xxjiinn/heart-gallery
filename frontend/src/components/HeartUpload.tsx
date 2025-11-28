@@ -11,11 +11,83 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = (file: File) => {
-    if (file && file.type.startsWith('image/')) {
+  const compressImage = async (file: File): Promise<{ file: File; previewUrl: string }> => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (e) => onImageUpload(file, e.target?.result as string);
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          // Canvas 생성
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          if (!ctx) {
+            reject(new Error('Canvas context not available'));
+            return;
+          }
+
+          // 최대 크기 설정 (800x800)
+          const maxSize = 800;
+          let width = img.width;
+          let height = img.height;
+
+          // 비율 유지하며 리사이징
+          if (width > height) {
+            if (width > maxSize) {
+              height = (height * maxSize) / width;
+              width = maxSize;
+            }
+          } else {
+            if (height > maxSize) {
+              width = (width * maxSize) / height;
+              height = maxSize;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          // 이미지 그리기
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // JPEG로 압축 (품질 85%)
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const compressedFile = new File([blob], file.name.replace(/\.\w+$/, '.jpg'), {
+                  type: 'image/jpeg',
+                  lastModified: Date.now(),
+                });
+                const previewUrl = URL.createObjectURL(blob);
+                resolve({ file: compressedFile, previewUrl });
+              } else {
+                reject(new Error('Compression failed'));
+              }
+            },
+            'image/jpeg',
+            0.85
+          );
+        };
+        img.onerror = () => reject(new Error('Image load failed'));
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error('File read failed'));
       reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFile = async (file: File) => {
+    if (file && file.type.startsWith('image/')) {
+      try {
+        const { file: compressedFile, previewUrl } = await compressImage(file);
+        onImageUpload(compressedFile, previewUrl);
+      } catch (error) {
+        console.error('Image compression error:', error);
+        // 압축 실패 시 원본 사용
+        const reader = new FileReader();
+        reader.onload = (e) => onImageUpload(file, e.target?.result as string);
+        reader.readAsDataURL(file);
+      }
     }
   };
 
