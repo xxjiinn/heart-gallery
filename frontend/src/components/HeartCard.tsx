@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -7,7 +7,7 @@ interface HeartCardProps {
   onClick?: () => void;
 }
 
-export function HeartCard({ memory, index, onClick }: HeartCardProps) {
+function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   // 데스크탑: 4열 그리드, 모바일: 2열 그리드
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const columns = isMobile ? 2 : 4;
@@ -144,7 +144,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             alignItems: 'center',
             justifyContent: 'center',
             padding: isMobile ? '20%' : '25%',
-            paddingTop: isMobile ? '15%' : '25%',
+            paddingTop: isMobile ? '15%' : '20%',
             opacity: showImage ? 0 : 1,
             transition: 'opacity 0.7s ease-in-out',
             pointerEvents: 'none',
@@ -176,3 +176,9 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
     </div>
   );
 }
+
+export const HeartCard = memo(HeartCardComponent, (prevProps, nextProps) => {
+  // onClick은 비교에서 제외하고, memory와 index만 비교
+  return prevProps.memory.id === nextProps.memory.id &&
+         prevProps.index === nextProps.index;
+});

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { HeartCard } from './HeartCard';
 import { HeartModal } from './HeartModal';
@@ -15,13 +15,13 @@ interface SquarePageProps {
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
   const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
 
-  const handleCardClick = (memory: HeartMemory) => {
+  const handleCardClick = useCallback((memory: HeartMemory) => {
     setSelectedMemory(memory);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setSelectedMemory(null);
-  };
+  }, []);
 
   // 모바일/데스크탑 감지
   const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
