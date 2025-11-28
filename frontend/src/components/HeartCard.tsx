@@ -59,6 +59,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
       <svg
         className="w-full h-auto aspect-square max-w-[500px]"
         viewBox="0 0 24 24"
+        preserveAspectRatio="xMidYMid meet"
         style={{
           backfaceVisibility: 'hidden',
           animationName: `float-${memory.id}`,
