@@ -20,12 +20,17 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const preloadImg = new Image();
     preloadImg.src = memory.imageUrl;
     preloadImg.loading = 'eager';
-  }, [memory.imageUrl]);
+    preloadImg.onload = () => {
+      // 이미지 로드 완료 후 약간의 지연을 주고 애니메이션 시작
+      setTimeout(() => setIsLoaded(true), index * 50); // 각 카드마다 50ms 차이
+    };
+  }, [memory.imageUrl, index]);
 
   useEffect(() => {
     // 첫 번째 전환: 3초 후
@@ -47,21 +52,38 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   }, []);
 
   useEffect(() => {
+    // 이미지가 로드된 후에만 strokeWidth 애니메이션 시작
+    if (!isLoaded) return;
+
     const interval = setInterval(() => {
       setStrokeWidth(prev => prev === 0.3 ? 1.0 : 0.3);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isLoaded]);
 
   return (
     <div className="flex items-center justify-center">
+      <style>{`
+        @keyframes float-${memory.id} {
+          0%, 100% {
+            transform: translateY(0px) translateZ(0);
+          }
+          50% {
+            transform: translateY(-10px) translateZ(0);
+          }
+        }
+      `}</style>
       <svg
         className="w-full h-auto aspect-square max-w-[500px]"
         viewBox="0 0 24 24"
         style={{
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
+          animation: isLoaded ? `float-${memory.id} ${3 + (index % 3)}s ease-in-out infinite` : 'none',
+          animationDelay: `${(index % 5) * 0.2}s`,
+          opacity: isLoaded ? 1 : 0,
+          transition: 'opacity 0.3s ease-in',
         }}
       >
         <defs>

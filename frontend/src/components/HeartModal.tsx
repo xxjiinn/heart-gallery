@@ -27,28 +27,28 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
         </div>
 
         {/* Content */}
-        <div className="px-8 pb-8 flex flex-col items-center gap-6">
+        <div className="px-6 md:px-8 pb-6 md:pb-8 flex flex-col items-center gap-4 md:gap-6">
           {/* Original Image */}
-          <div className="w-full max-w-[320px] max-h-[400px] flex items-center justify-center">
+          <div className="w-full max-w-[280px] md:max-w-[320px] max-h-[300px] md:max-h-[400px] flex items-center justify-center">
             <img
               src={memory.imageUrl}
               alt="Memory"
-              className="w-full h-auto max-h-[400px] object-contain rounded-2xl shadow-lg"
+              className="w-auto h-auto max-w-full max-h-[300px] md:max-h-[400px] object-contain rounded-2xl shadow-lg"
             />
           </div>
 
           {/* Nickname */}
           {memory.nickname && (
             <div className="text-center">
-              <p className="text-gray-500 text-sm font-semibold mb-1">닉네임</p>
-              <p className="text-gray-800 text-lg font-bold">{memory.nickname}</p>
+              <p className="text-gray-500 text-xs md:text-sm font-semibold mb-1">닉네임</p>
+              <p className="text-gray-800 text-base md:text-lg font-bold">{memory.nickname}</p>
             </div>
           )}
 
           {/* Message */}
-          <div className="text-center">
-            <p className="text-gray-500 text-sm font-semibold mb-1">메시지</p>
-            <p className="text-gray-800 text-lg font-medium leading-relaxed break-words px-4">
+          <div className="text-center max-w-full px-2">
+            <p className="text-gray-500 text-xs md:text-sm font-semibold mb-1">메시지</p>
+            <p className="text-gray-800 text-base md:text-lg font-medium leading-relaxed break-words">
               {memory.message}
             </p>
           </div>
