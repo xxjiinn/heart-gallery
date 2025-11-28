@@ -43,11 +43,12 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
     for (let i = 0; i < memories.length; i += columns) {
       result.push(memories.slice(i, i + columns));
     }
+    console.log('Rows generated:', result.length, 'rows from', memories.length, 'memories');
     return result;
   }, [memories, columns]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
+    <div className="h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
       {/* Global animations for all hearts */}
       <style>{`
         ${memories.map((memory) => `
@@ -115,7 +116,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
 
       {/* ░░ Grid 영역 ░░ */}
-      <div className="w-full max-w-7xl mx-auto flex-1 px-2 md:px-4 pt-4 md:pt-6">
+      <div className="w-full max-w-7xl mx-auto flex-1 px-2 md:px-4 pt-4 md:pt-6" style={{ minHeight: 0 }}>
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="animate-pulse text-center">
@@ -134,7 +135,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           </div>
         ) : (
           <Virtuoso
-            style={{ height: '100%' }}
+            style={{ height: '100%', width: '100%' }}
             totalCount={rows.length}
             onScroll={handleScroll}
             itemContent={(rowIndex) => (
