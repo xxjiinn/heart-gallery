@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { HeartCard } from './HeartCard';
+import { HeartModal } from './HeartModal';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart } from 'lucide-react';
 import type { HeartMemory } from '../App';
@@ -10,6 +12,15 @@ interface SquarePageProps {
 }
 
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
+  const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
+
+  const handleCardClick = (memory: HeartMemory) => {
+    setSelectedMemory(memory);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMemory(null);
+  };
   return (
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
       {/* Header Bar */}
@@ -81,11 +92,21 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1">
             {memories.map((memory, index) => (
-              <HeartCard key={memory.id} memory={memory} index={index} />
+              <HeartCard
+                key={memory.id}
+                memory={memory}
+                index={index}
+                onClick={() => handleCardClick(memory)}
+              />
             ))}
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {selectedMemory && (
+        <HeartModal memory={selectedMemory} onClose={handleCloseModal} />
+      )}
 
       {/* <div className="flex justify-center mt-6 mb-6 md:mb-10 flex-shrink-0">
         <Button
