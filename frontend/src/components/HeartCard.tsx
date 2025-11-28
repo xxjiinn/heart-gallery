@@ -64,9 +64,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
           animationIterationCount: 'infinite',
           animationDelay: `${(index % 5) * 0.2}s`,
           transform: 'translateZ(0)',
-          pointerEvents: 'none',
         }}
-        shapeRendering="optimizeSpeed"
       >
         <defs>
           <clipPath id={`heartClip-${memory.id}`}>
