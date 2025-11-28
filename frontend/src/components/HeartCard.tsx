@@ -48,10 +48,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   return (
     <div
       className="flex items-center justify-center cursor-pointer"
-      style={{
-        contain: 'layout style paint',
-        contentVisibility: 'auto'
-      }}
       onClick={(e) => {
         onClick?.();
       }}
