@@ -14,7 +14,6 @@ interface SquarePageProps {
 
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
   const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   const handleCardClick = (memory: HeartMemory) => {
     setSelectedMemory(memory);
@@ -22,15 +21,6 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
   const handleCloseModal = () => {
     setSelectedMemory(null);
-  };
-
-  // 스크롤 감지
-  const handleScroll = () => {
-    setIsScrolling(true);
-    const timeoutId = setTimeout(() => {
-      setIsScrolling(false);
-    }, 150);
-    return () => clearTimeout(timeoutId);
   };
 
   // 모바일/데스크탑 감지
@@ -61,11 +51,6 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             }
           }
         `).join('\n')}
-
-        /* 스크롤 중 애니메이션 일시 정지 */
-        .scrolling * {
-          animation-play-state: paused !important;
-        }
       `}</style>
 
       {/* Header Bar - Fixed */}
@@ -118,7 +103,6 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         <Virtuoso
           style={{ flex: 1 }}
           totalCount={rows.length}
-          onScroll={handleScroll}
           components={{
             Header: () => (
               <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] px-6 md:px-[2.85vw]">
@@ -146,7 +130,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           }}
           itemContent={(rowIndex) => (
             <div
-              className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
+              className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1"
               style={{
                 maxWidth: '1792px',
                 margin: '0 auto',

@@ -68,8 +68,8 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
         }
       `}</style>
 
-      {/* SVG container */}
-      <svg
+      {/* Floating wrapper */}
+      <div
         style={{
           position: 'relative',
           width: '100%',
@@ -77,84 +77,96 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
           animation: `float-${memory.id} ${3 + (index % 3)}s ease-in-out infinite`,
           animationDelay: `${(index % 5) * 0.2}s`,
         }}
-        viewBox="0 0 24 24"
-        preserveAspectRatio="xMidYMid meet"
       >
-        <defs>
-          <clipPath id={`heart-clip-${memory.id}`}>
-            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-          </clipPath>
-        </defs>
+        {/* SVG container */}
+        <svg
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+          }}
+          viewBox="0 0 24 24"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <clipPath id={`heart-clip-${memory.id}`}>
+              <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+            </clipPath>
+          </defs>
 
-        {/* White background when showing text */}
-        {!showImage && (
-          <rect
+          {/* White background when showing text */}
+          {!showImage && (
+            <rect
+              width="24"
+              height="24"
+              fill="white"
+              clipPath={`url(#heart-clip-${memory.id})`}
+            />
+          )}
+
+          {/* Image */}
+          <image
+            href={memory.imageUrl}
             width="24"
             height="24"
-            fill="white"
+            preserveAspectRatio="xMidYMid slice"
             clipPath={`url(#heart-clip-${memory.id})`}
+            style={{
+              opacity: showImage ? 1 : 0,
+              transition: 'opacity 0.7s ease-in-out',
+            }}
           />
-        )}
 
-        {/* Image */}
-        <image
-          href={memory.imageUrl}
-          width="24"
-          height="24"
-          preserveAspectRatio="xMidYMid slice"
-          clipPath={`url(#heart-clip-${memory.id})`}
-          style={{
-            opacity: showImage ? 1 : 0,
-            transition: 'opacity 0.7s ease-in-out',
-          }}
-        />
+          {/* Border */}
+          <path
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+            fill="none"
+            stroke="#FFCCE4"
+            strokeWidth={strokeWidth}
+            style={{
+              transition: 'stroke-width 1.0s ease-in-out',
+            }}
+          />
+        </svg>
 
-        {/* Border */}
-        <path
-          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-          fill="none"
-          stroke="#FFCCE4"
-          strokeWidth={strokeWidth}
-          style={{
-            transition: 'stroke-width 1.0s ease-in-out',
-          }}
-        />
-      </svg>
-
-      {/* Text layer as HTML overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '15%',
-          opacity: showImage ? 0 : 1,
-          transition: 'opacity 0.7s ease-in-out',
-          pointerEvents: 'none',
-        }}
-      >
+        {/* Text layer as HTML overlay (inside floating wrapper) */}
         <div
           style={{
-            fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
-            fontWeight: 700,
-            color: '#1f2937',
-            textAlign: 'center',
-            lineHeight: '1.5',
-            wordBreak: 'keep-all',
-            overflowWrap: 'break-word',
-            overflow: 'hidden',
-            fontSize: isMobile ? '0.75rem' : '0.875rem',
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isMobile ? '30%' : '30%',
+            paddingTop: isMobile ? '25%' : '25%',
+            opacity: showImage ? 0 : 1,
+            transition: 'opacity 0.7s ease-in-out',
+            pointerEvents: 'none',
           }}
         >
-          {memory.nickname && (
-            <div style={{ fontWeight: 600, color: '#6b7280', marginBottom: '0.5em', fontSize: '0.9em' }}>
-              {memory.nickname}
-            </div>
-          )}
-          <div>{memory.message}</div>
+          <div
+            style={{
+              fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
+              fontWeight: 700,
+              color: '#1f2937',
+              textAlign: 'center',
+              lineHeight: '1.4',
+              wordBreak: 'keep-all',
+              overflowWrap: 'break-word',
+              overflow: 'hidden',
+              width: '100%',
+              fontSize: isMobile ? '0.95rem' : '1.3rem',
+            }}
+          >
+            {memory.nickname && (
+              <div style={{ fontWeight: 600, color: '#6b7280', marginBottom: '0.8em', fontSize: '0.85em' }}>
+                {memory.nickname}
+              </div>
+            )}
+            <div style={{ whiteSpace: 'pre-wrap' }}>{memory.message}</div>
+          </div>
         </div>
       </div>
     </div>
