@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -8,9 +8,6 @@ interface HeartCardProps {
 }
 
 export function HeartCard({ memory, index, onClick }: HeartCardProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
   // 데스크탑: 4열 그리드, 모바일: 2열 그리드
   const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
   const columns = isMobile ? 2 : 4;
@@ -23,36 +20,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
 
-  // Intersection Observer로 화면에 보이는지 감지
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      {
-        rootMargin: '10px', // 10px 전에 미리 로드
-        threshold: 0.01,
-      }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return; // 화면에 보일 때만 애니메이션 시작
-
     // 첫 번째 전환: 3초 후
     const firstTimeout = setTimeout(() => {
       setShowImage(prev => !prev);
@@ -67,36 +35,18 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
       clearTimeout(firstTimeout);
       clearInterval(interval);
     };
-  }, [isVisible]);
+  }, []);
 
   useEffect(() => {
-    if (!isVisible) return; // 화면에 보일 때만 애니메이션 시작
-
     const interval = setInterval(() => {
       setStrokeWidth(prev => prev === 0.3 ? 1.0 : 0.3);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isVisible]);
-
-  // Placeholder for cards not yet visible
-  if (!isVisible) {
-    return (
-      <div
-        ref={cardRef}
-        className="flex items-center justify-center"
-        style={{
-          aspectRatio: '1',
-          minHeight: '150px',
-          backgroundColor: '#FFE5F1',
-        }}
-      />
-    );
-  }
+  }, []);
 
   return (
     <div
-      ref={cardRef}
       className="flex items-center justify-center cursor-pointer"
       style={{
         contain: 'layout style paint',

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { Virtuoso } from 'react-virtuoso';
 import { HeartCard } from './HeartCard';
 import { HeartModal } from './HeartModal';
 import { Button } from './ui/button';
@@ -31,6 +32,19 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
     }, 150);
     return () => clearTimeout(timeoutId);
   };
+
+  // 모바일/데스크탑 감지
+  const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
+  const columns = isMobile ? 2 : 4;
+
+  // memories를 행(row)으로 그룹화
+  const rows = useMemo(() => {
+    const result = [];
+    for (let i = 0; i < memories.length; i += columns) {
+      result.push(memories.slice(i, i + columns));
+    }
+    return result;
+  }, [memories, columns]);
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
@@ -101,10 +115,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
 
       {/* ░░ Grid 영역 ░░ */}
-      <div
-        className="w-full max-w-7xl mx-auto flex-1 overflow-y-auto px-2 md:px-4 pt-4 md:pt-6 scrollbar-hide"
-        onScroll={handleScroll}
-      >
+      <div className="w-full max-w-7xl mx-auto flex-1 px-2 md:px-4 pt-4 md:pt-6">
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="animate-pulse text-center">
@@ -122,22 +133,31 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             </div>
           </div>
         ) : (
-          <div
-            className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
-            style={{
-              contain: 'layout style',
-              willChange: 'scroll-position',
-            }}
-          >
-            {memories.map((memory, index) => (
-              <HeartCard
-                key={memory.id}
-                memory={memory}
-                index={index}
-                onClick={() => handleCardClick(memory)}
-              />
-            ))}
-          </div>
+          <Virtuoso
+            style={{ height: '100%' }}
+            totalCount={rows.length}
+            onScroll={handleScroll}
+            itemContent={(rowIndex) => (
+              <div
+                className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 mb-1 ${isScrolling ? 'scrolling' : ''}`}
+                style={{
+                  contain: 'layout style',
+                }}
+              >
+                {rows[rowIndex].map((memory, colIndex) => {
+                  const globalIndex = rowIndex * columns + colIndex;
+                  return (
+                    <HeartCard
+                      key={memory.id}
+                      memory={memory}
+                      index={globalIndex}
+                      onClick={() => handleCardClick(memory)}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          />
         )}
       </div>
 
