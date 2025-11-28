@@ -24,14 +24,26 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   useEffect(() => {
     const preloadImg = new Image();
     preloadImg.src = memory.imageUrl;
+    preloadImg.loading = 'eager';
   }, [memory.imageUrl]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // 첫 번째 전환: 3초 후
+    const firstTimeout = setTimeout(() => {
       setShowImage(prev => !prev);
-    }, 5000);
 
-    return () => clearInterval(interval);
+      // 첫 전환 후 5초마다 반복
+      const interval = setInterval(() => {
+        setShowImage(prev => !prev);
+      }, 5000);
+
+      // cleanup을 위해 interval ID를 저장
+      return () => clearInterval(interval);
+    }, 3000);
+
+    return () => {
+      clearTimeout(firstTimeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -71,6 +83,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             style={{
               opacity: showImage ? 1 : 0,
               transition: 'opacity 0.7s ease-in-out',
+              willChange: 'opacity',
             }}
           />
 
@@ -84,6 +97,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
               opacity: showImage ? 0 : 1,
               transition: 'opacity 0.7s ease-in-out',
               pointerEvents: 'none',
+              willChange: 'opacity',
             }}
           >
             <div
