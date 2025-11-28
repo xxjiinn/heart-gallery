@@ -13,6 +13,7 @@ interface SquarePageProps {
 
 export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
   const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const handleCardClick = (memory: HeartMemory) => {
     setSelectedMemory(memory);
@@ -21,6 +22,16 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
   const handleCloseModal = () => {
     setSelectedMemory(null);
   };
+
+  // 스크롤 감지
+  const handleScroll = () => {
+    setIsScrolling(true);
+    const timeoutId = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+    return () => clearTimeout(timeoutId);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
       {/* Global animations for all hearts */}
@@ -35,6 +46,11 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             }
           }
         `).join('\n')}
+
+        /* 스크롤 중 애니메이션 일시 정지 */
+        .scrolling * {
+          animation-play-state: paused !important;
+        }
       `}</style>
       {/* Header Bar */}
       <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
@@ -85,7 +101,10 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
 
       {/* ░░ Grid 영역 ░░ */}
-      <div className="w-full max-w-7xl mx-auto flex-1 overflow-y-auto px-2 md:px-4 pt-4 md:pt-6 scrollbar-hide">
+      <div
+        className="w-full max-w-7xl mx-auto flex-1 overflow-y-auto px-2 md:px-4 pt-4 md:pt-6 scrollbar-hide"
+        onScroll={handleScroll}
+      >
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="animate-pulse text-center">
@@ -103,7 +122,9 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1">
+          <div
+            className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
+          >
             {memories.map((memory, index) => (
               <HeartCard
                 key={memory.id}

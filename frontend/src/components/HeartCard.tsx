@@ -49,7 +49,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   return (
     <div
       className="flex items-center justify-center cursor-pointer"
-      style={{ contentVisibility: 'auto' }}
       onClick={(e) => {
         onClick?.();
       }}
@@ -64,7 +63,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
           animationTimingFunction: 'ease-in-out',
           animationIterationCount: 'infinite',
           animationDelay: `${(index % 5) * 0.2}s`,
-          willChange: 'transform',
+          transform: 'translateZ(0)',
           pointerEvents: 'none',
         }}
       >
