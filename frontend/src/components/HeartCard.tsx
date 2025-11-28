@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -10,7 +10,7 @@ interface HeartCardProps {
 export function HeartCard({ memory, index, onClick }: HeartCardProps) {
 
   // 데스크탑: 4열 그리드, 모바일: 2열 그리드
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
   const columns = isMobile ? 2 : 4;
 
   const columnIndex = index % columns;
@@ -21,7 +21,6 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
   const [isLoaded, setIsLoaded] = useState(true); // 즉시 표시
-  const [isPreparing, setIsPreparing] = useState(false);
 
   useEffect(() => {
     const preloadImg = new Image();
@@ -32,28 +31,17 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   useEffect(() => {
     // 첫 번째 전환: 3초 후
     const firstTimeout = setTimeout(() => {
-      // 0.3초 전에 다음 상태를 준비
-      setIsPreparing(true);
-      setTimeout(() => {
-        setShowImage(prev => !prev);
-        setIsPreparing(false);
-      }, 500);
-
-      // 첫 전환 후 5초마다 반복
-      const interval = setInterval(() => {
-        setIsPreparing(true);
-        setTimeout(() => {
-          setShowImage(prev => !prev);
-          setIsPreparing(false);
-        }, 500);
-      }, 5000);
-
-      // cleanup을 위해 interval ID를 저장
-      return () => clearInterval(interval);
+      setShowImage(prev => !prev);
     }, 3000);
+
+    // 첫 전환 후 5초마다 반복
+    const interval = setInterval(() => {
+      setShowImage(prev => !prev);
+    }, 5000);
 
     return () => {
       clearTimeout(firstTimeout);
+      clearInterval(interval);
     };
   }, []);
 
@@ -72,20 +60,9 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
     <div
       className="flex items-center justify-center cursor-pointer"
       onClick={(e) => {
-        console.log('HeartCard clicked!', memory.id);
         onClick?.();
       }}
     >
-      <style>{`
-        @keyframes float-${memory.id} {
-          0%, 100% {
-            transform: translateY(0px) translateZ(0);
-          }
-          50% {
-            transform: translateY(-10px) translateZ(0);
-          }
-        }
-      `}</style>
       <svg
         className="w-full h-auto aspect-square max-w-[500px]"
         viewBox="0 0 24 24"

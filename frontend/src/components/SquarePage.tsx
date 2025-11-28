@@ -23,6 +23,19 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
   };
   return (
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-[120px] md:pb-[140px] overflow-hidden">
+      {/* Global animations for all hearts */}
+      <style>{`
+        ${memories.map((memory) => `
+          @keyframes float-${memory.id} {
+            0%, 100% {
+              transform: translateY(0px) translateZ(0);
+            }
+            50% {
+              transform: translateY(-10px) translateZ(0);
+            }
+          }
+        `).join('\n')}
+      `}</style>
       {/* Header Bar */}
       <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
                       shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
