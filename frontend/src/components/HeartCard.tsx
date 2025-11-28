@@ -21,6 +21,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPreparing, setIsPreparing] = useState(false);
 
   useEffect(() => {
     const preloadImg = new Image();
@@ -35,11 +36,20 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
   useEffect(() => {
     // 첫 번째 전환: 3초 후
     const firstTimeout = setTimeout(() => {
-      setShowImage(prev => !prev);
+      // 0.3초 전에 다음 상태를 준비
+      setIsPreparing(true);
+      setTimeout(() => {
+        setShowImage(prev => !prev);
+        setIsPreparing(false);
+      }, 300);
 
       // 첫 전환 후 5초마다 반복
       const interval = setInterval(() => {
-        setShowImage(prev => !prev);
+        setIsPreparing(true);
+        setTimeout(() => {
+          setShowImage(prev => !prev);
+          setIsPreparing(false);
+        }, 300);
       }, 5000);
 
       // cleanup을 위해 interval ID를 저장
@@ -124,7 +134,7 @@ export function HeartCard({ memory, index, onClick }: HeartCardProps) {
             width="18"
             height="11"
             style={{
-              opacity: showImage ? 0 : 1,
+              opacity: showImage ? 0 : (isPreparing && showImage ? 0.01 : 1),
               transition: 'opacity 0.7s ease-in-out',
               pointerEvents: 'none',
               willChange: 'opacity',
