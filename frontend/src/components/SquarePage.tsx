@@ -140,9 +140,9 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
             onScroll={handleScroll}
             itemContent={(rowIndex) => (
               <div
-                className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 mb-1 ${isScrolling ? 'scrolling' : ''}`}
+                className={`grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1 ${isScrolling ? 'scrolling' : ''}`}
                 style={{
-                  contain: 'layout style',
+                  paddingBottom: '4px',
                 }}
               >
                 {rows[rowIndex].map((memory, colIndex) => {
