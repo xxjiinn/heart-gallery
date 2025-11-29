@@ -35,7 +35,7 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
       `}</style>
 
       <div
-        className="relative bg-white rounded-[32px] shadow-2xl max-w-[380px] md:max-w-[520px] w-full"
+        className="relative bg-white rounded-[32px] shadow-2xl max-w-[340px] md:max-w-[520px] w-full"
         onClick={(e) => e.stopPropagation()}
         style={{
           animation: 'scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',

@@ -21,10 +21,10 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   const [strokeWidth, setStrokeWidth] = useState(0.3);
 
   useEffect(() => {
-    // 첫 번째 전환: 3초 후
+    // 첫 번째 전환: 4초 후
     const firstTimeout = setTimeout(() => {
       setShowImage(prev => !prev);
-    }, 3000);
+    }, 4000);
 
     // 첫 전환 후 5초마다 반복
     const interval = setInterval(() => {
@@ -63,7 +63,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
           }
         }
       `}</style>
@@ -144,7 +144,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             alignItems: 'center',
             justifyContent: 'center',
             padding: isMobile ? '20%' : '25%',
-            paddingTop: isMobile ? '13%' : '20%',
+            paddingTop: isMobile ? '10%' : '20%',
             opacity: showImage ? 0 : 1,
             transition: 'opacity 0.7s ease-in-out',
             pointerEvents: 'none',
@@ -153,7 +153,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
           <div
             style={{
               fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
-              fontWeight: 700,
+              fontWeight: 500,
               color: '#1f2937',
               textAlign: 'center',
               lineHeight: '1.4',

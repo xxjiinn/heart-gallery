@@ -128,7 +128,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
               `}
             >
               <Heart className="w-5 h-5 md:w-5 md:h-5 mr-2" />
-              순간을 간직하기
+               아!愛 모먼트 간직하기
             </Button>
 
             <Button

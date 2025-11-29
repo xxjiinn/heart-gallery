@@ -47,7 +47,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
               transform: translateY(0px) translateZ(0);
             }
             50% {
-              transform: translateY(-10px) translateZ(0);
+              transform: translateY(-5px) translateZ(0);
             }
           }
         `).join('\n')}
