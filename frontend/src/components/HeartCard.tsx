@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useRef } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -19,21 +19,24 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // 첫 번째 전환: 6초 후
     const firstTimeout = setTimeout(() => {
       setShowImage(prev => !prev);
-    }, 6000);
 
-    // 첫 전환 후 7초마다 반복
-    const interval = setInterval(() => {
-      setShowImage(prev => !prev);
-    }, 7000);
+      // 첫 전환 후 7초마다 반복
+      intervalRef.current = setInterval(() => {
+        setShowImage(prev => !prev);
+      }, 7000);
+    }, 6000);
 
     return () => {
       clearTimeout(firstTimeout);
-      clearInterval(interval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
 
