@@ -189,8 +189,10 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
 
       const containerRect = containerElement.getBoundingClientRect();
 
-      // 하트 클립 패스 적용
-      const heartPath = new Path2D('M300,533.75L263.75,500.75C135,377 50,306.75 50,212.5C50,135.25 110.5,75 187.5,75C231,75 272.75,95.25 300,127C327.25,95.25 369,75 412.5,75C489.5,75 550,135.25 550,212.5C550,306.75 465,377 336.25,500.75L300,533.75Z');
+      // 하트 클립 패스 적용 (SVG와 동일한 경로를 600x600으로 스케일)
+      const scale = heartSize / 24;
+      const heartPath = new Path2D();
+      heartPath.addPath(new Path2D('M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z'), new DOMMatrix().scale(scale, scale));
       ctx.save();
       ctx.clip(heartPath);
 
@@ -208,11 +210,12 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
         // Canvas에 그릴 때의 스케일
         const canvasScale = heartSize / containerWidth;
 
-        // 이미지 중심을 컨테이너 중심에 맞춤
-        const drawX = (containerWidth / 2 - (displayedImg.width * imageScale) / 2 + offsetX) * canvasScale;
-        const drawY = (containerHeight / 2 - (displayedImg.height * imageScale) / 2 + offsetY) * canvasScale;
-        const drawWidth = displayedImg.width * imageScale * canvasScale;
-        const drawHeight = displayedImg.height * imageScale * canvasScale;
+        // 이미지 중심을 컨테이너 중심에 맞춤 (102% 크기로 여유 공간 추가)
+        const scaleFactor = 1.10;
+        const drawX = ((containerWidth / 2 - (displayedImg.width * imageScale) / 2 + offsetX) * canvasScale) - (displayedImg.width * imageScale * canvasScale * (scaleFactor - 1) / 2);
+        const drawY = ((containerHeight / 2 - (displayedImg.height * imageScale) / 2 + offsetY) * canvasScale) - (displayedImg.height * imageScale * canvasScale * (scaleFactor - 1) / 2);
+        const drawWidth = displayedImg.width * imageScale * canvasScale * scaleFactor;
+        const drawHeight = displayedImg.height * imageScale * canvasScale * scaleFactor;
 
         ctx.drawImage(
           img,
@@ -320,7 +323,12 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       {/* Crop Modal */}
       {showCropModal && createPortal(
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+          style={{
+            backgroundColor: 'rgba(255, 181, 216, 0.3)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)'
+          }}
           onClick={handleCropCancel}
         >
           <div

@@ -19,7 +19,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
 
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     // 첫 번째 전환: 6초 후
@@ -116,7 +116,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             href={memory.imageUrl}
             width="24"
             height="24"
-            preserveAspectRatio="xMidYMid slice"
+            preserveAspectRatio="none"
             clipPath={`url(#heart-clip-${memory.id})`}
             style={{
               opacity: showImage ? 1 : 0,
