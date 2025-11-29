@@ -106,7 +106,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           components={{
             Header: () => (
               <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] px-6 md:px-[2.85vw]">
-                <div className="w-full md:w-[438px] h-auto md:h-[54px] mx-auto flex flex-col items-center justify-center">
+                <div className="w-full md:w-[438px] h-auto mx-auto flex flex-col items-center justify-center">
                   <p
                     className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center"
                     style={{ letterSpacing: '-0.466px' }}
@@ -118,6 +118,12 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
                     style={{ letterSpacing: '-0.466px' }}
                   >
                     ✨ 지나쳤던 일상 속 사랑의 순간을 떠올려보세요 ✨
+                  </p>
+                  <p
+                    className="font-[Pretendard Variable] font-medium text-[13px] md:text-[14px] text-center mt-2"
+                    style={{ color: '#5E5E5E' }}
+                  >
+                    *하트를 클릭해보세요!
                   </p>
                 </div>
               </div>
