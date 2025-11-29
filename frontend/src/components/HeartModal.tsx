@@ -146,10 +146,16 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
       {showFullImage && (
         <div
           className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setShowFullImage(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowFullImage(false);
+          }}
         >
           <button
-            onClick={() => setShowFullImage(false)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowFullImage(false);
+            }}
             className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center transition-all hover:bg-white hover:scale-110"
           >
             <X className="w-5 h-5 text-gray-700" />
