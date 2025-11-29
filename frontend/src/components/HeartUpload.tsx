@@ -17,6 +17,8 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
   const [isDraggingImage, setIsDraggingImage] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [originalImageSize, setOriginalImageSize] = useState({ width: 0, height: 0 });
+  const [initialPinchDistance, setInitialPinchDistance] = useState<number | null>(null);
+  const [initialScale, setInitialScale] = useState(1);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cropCanvasRef = useRef<HTMLCanvasElement>(null);
   const tempImageRef = useRef<HTMLImageElement>(null);
@@ -117,14 +119,36 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
     setIsDraggingImage(false);
   };
 
+  const getPinchDistance = (touches: React.TouchList) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
   const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    setIsDraggingImage(true);
-    setDragStart({ x: touch.clientX - imagePosition.x, y: touch.clientY - imagePosition.y });
+    if (e.touches.length === 2) {
+      // 핀치 줌 시작
+      const distance = getPinchDistance(e.touches);
+      setInitialPinchDistance(distance);
+      setInitialScale(imageScale);
+      setIsDraggingImage(false);
+    } else if (e.touches.length === 1) {
+      // 드래그 시작
+      const touch = e.touches[0];
+      setIsDraggingImage(true);
+      setDragStart({ x: touch.clientX - imagePosition.x, y: touch.clientY - imagePosition.y });
+    }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDraggingImage && e.touches.length === 1) {
+    if (e.touches.length === 2 && initialPinchDistance !== null) {
+      // 핀치 줌
+      e.preventDefault();
+      const currentDistance = getPinchDistance(e.touches);
+      const scale = (currentDistance / initialPinchDistance) * initialScale;
+      setImageScale(Math.min(Math.max(scale, 0.5), 3));
+    } else if (isDraggingImage && e.touches.length === 1) {
+      // 드래그
       const touch = e.touches[0];
       setImagePosition({
         x: touch.clientX - dragStart.x,
@@ -135,6 +159,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
 
   const handleTouchEnd = () => {
     setIsDraggingImage(false);
+    setInitialPinchDistance(null);
   };
 
   const handleZoomIn = () => {
@@ -158,29 +183,10 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       canvas.height = heartSize;
 
       const displayedImg = tempImageRef.current;
-      const containerRect = displayedImg.parentElement?.getBoundingClientRect();
-      if (!containerRect) throw new Error('Container not found');
+      const containerElement = displayedImg.parentElement?.parentElement;
+      if (!containerElement) throw new Error('Container not found');
 
-      // 이미지의 원본 크기와 표시 크기 비율
-      const naturalWidth = displayedImg.naturalWidth;
-      const naturalHeight = displayedImg.naturalHeight;
-      const displayWidth = displayedImg.width;
-      const displayHeight = displayedImg.height;
-      const scaleRatio = naturalWidth / displayWidth;
-
-      // 컨테이너 중심
-      const containerCenterX = containerRect.width / 2;
-      const containerCenterY = containerRect.height / 2;
-
-      // 이미지 중심 (변환 적용 후)
-      const imageCenterX = containerCenterX + imagePosition.x;
-      const imageCenterY = containerCenterY + imagePosition.y;
-
-      // 원본 이미지에서의 크롭 영역 계산
-      const cropWidth = (containerRect.width / imageScale) * scaleRatio;
-      const cropHeight = (containerRect.height / imageScale) * scaleRatio;
-      const cropX = (naturalWidth / 2) - (cropWidth / 2) - (imagePosition.x * scaleRatio / imageScale);
-      const cropY = (naturalHeight / 2) - (cropHeight / 2) - (imagePosition.y * scaleRatio / imageScale);
+      const containerRect = containerElement.getBoundingClientRect();
 
       // 하트 클립 패스 적용
       const heartPath = new Path2D('M300,533.75L263.75,500.75C135,377 50,306.75 50,212.5C50,135.25 110.5,75 187.5,75C231,75 272.75,95.25 300,127C327.25,95.25 369,75 412.5,75C489.5,75 550,135.25 550,212.5C550,306.75 465,377 336.25,500.75L300,533.75Z');
@@ -190,16 +196,29 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       // 원본 이미지를 로드하여 크롭
       const img = new Image();
       img.onload = () => {
+        // 컨테이너 크기
+        const containerWidth = containerRect.width;
+        const containerHeight = containerRect.height;
+
+        // 이미지가 컨테이너 중심에서 얼마나 이동했는지
+        const offsetX = imagePosition.x;
+        const offsetY = imagePosition.y;
+
+        // Canvas에 그릴 때의 스케일
+        const canvasScale = heartSize / containerWidth;
+
+        // 이미지 중심을 컨테이너 중심에 맞춤
+        const drawX = (containerWidth / 2 - (displayedImg.width * imageScale) / 2 + offsetX) * canvasScale;
+        const drawY = (containerHeight / 2 - (displayedImg.height * imageScale) / 2 + offsetY) * canvasScale;
+        const drawWidth = displayedImg.width * imageScale * canvasScale;
+        const drawHeight = displayedImg.height * imageScale * canvasScale;
+
         ctx.drawImage(
           img,
-          cropX,
-          cropY,
-          cropWidth,
-          cropHeight,
-          0,
-          0,
-          heartSize,
-          heartSize
+          drawX,
+          drawY,
+          drawWidth,
+          drawHeight
         );
 
         ctx.restore();
