@@ -319,7 +319,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       {/* Crop Modal */}
       {showCropModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80"
           onClick={handleCropCancel}
         >
           <div
@@ -405,8 +405,8 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
               </div>
             </div>
 
-            {/* Zoom Controls */}
-            <div className="px-6 pb-4">
+            {/* Zoom Controls - 데스크탑만 */}
+            <div className="px-6 pb-4 hidden md:block">
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleZoomOut}
