@@ -6,6 +6,7 @@ import { SquarePage } from './components/SquarePage';
 export interface HeartMemory {
   id: number;
   imageUrl: string;
+  fullImageUrl?: string;
   nickname: string;
   message: string;
   createdAt: string;
@@ -56,13 +57,14 @@ export default function App() {
     }
   };
 
-  const handleSaveMemory = async (file: File, nickname: string, message: string) => {
+  const handleSaveMemory = async (croppedFile: File, fullFile: File, nickname: string, message: string) => {
     try {
       // 로딩 시작
       setIsSaving(true);
 
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', croppedFile);
+      formData.append('fullFile', fullFile);
       formData.append('nickname', nickname);
       formData.append('message', message);
 

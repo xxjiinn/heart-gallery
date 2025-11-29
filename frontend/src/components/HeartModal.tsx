@@ -61,7 +61,7 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
           }}
         >
           <img
-            src={memory.imageUrl}
+            src={memory.fullImageUrl || memory.imageUrl}
             alt="Memory"
             className="w-full h-full object-cover"
           />
@@ -161,7 +161,7 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
             <X className="w-5 h-5 text-gray-700" />
           </button>
           <img
-            src={memory.imageUrl}
+            src={memory.fullImageUrl || memory.imageUrl}
             alt="Memory Full"
             className="max-w-full max-h-full object-contain"
             onClick={(e) => e.stopPropagation()}

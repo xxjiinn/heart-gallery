@@ -4,27 +4,30 @@ import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
 
 interface MainPageProps {
-  onSave: (file: File, nickname: string, message: string) => void;
+  onSave: (croppedFile: File, fullFile: File, nickname: string, message: string) => void;
   onViewGallery: () => void;
 }
 
 export function MainPage({ onSave, onViewGallery }: MainPageProps) {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [fullImageFile, setFullImageFile] = useState<File | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [nickname, setNickname] = useState('');
   const [message, setMessage] = useState('');
   const maxNicknameChars = 10;
   const maxMessageChars = 30;
 
-  const handleImageUpload = (file: File, previewUrl: string) => {
-    setUploadedFile(file);
-    setUploadedImage(previewUrl);
+  const handleImageUpload = (croppedFile: File, croppedPreviewUrl: string, fullFile: File) => {
+    setUploadedFile(croppedFile);
+    setFullImageFile(fullFile);
+    setUploadedImage(croppedPreviewUrl);
   };
 
   const handleSave = () => {
-    if (uploadedFile && message.trim()) {
-      onSave(uploadedFile, nickname, message);
+    if (uploadedFile && fullImageFile && message.trim()) {
+      onSave(uploadedFile, fullImageFile, nickname, message);
       setUploadedFile(null);
+      setFullImageFile(null);
       setUploadedImage(null);
       setNickname('');
       setMessage('');
@@ -45,7 +48,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
     }
   };
 
-  const isSaveDisabled = !uploadedFile || !nickname.trim() || !message.trim();
+  const isSaveDisabled = !uploadedFile || !fullImageFile || !nickname.trim() || !message.trim();
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh]">

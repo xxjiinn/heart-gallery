@@ -21,15 +21,15 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   const [strokeWidth, setStrokeWidth] = useState(0.3);
 
   useEffect(() => {
-    // 첫 번째 전환: 4초 후
+    // 첫 번째 전환: 6초 후
     const firstTimeout = setTimeout(() => {
       setShowImage(prev => !prev);
-    }, 4000);
+    }, 6000);
 
-    // 첫 전환 후 5초마다 반복
+    // 첫 전환 후 7초마다 반복
     const interval = setInterval(() => {
       setShowImage(prev => !prev);
-    }, 5000);
+    }, 7000);
 
     return () => {
       clearTimeout(firstTimeout);
