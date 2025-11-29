@@ -48,8 +48,8 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
   const isSaveDisabled = !uploadedFile || !nickname.trim() || !message.trim();
 
   return (
-    <div className="h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh] overflow-hidden">
-      <div className="w-full flex flex-col items-center h-full">
+    <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh]">
+      <div className="w-full flex flex-col items-center">
 
         {/* Header Bar */}
         <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
@@ -76,7 +76,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
 
         {/* Content Container */}
-        <div className="w-full max-w-md md:max-w-[900px] mx-auto px-0 flex-1 flex flex-col min-h-0">
+        <div className="w-full max-w-md md:max-w-[900px] mx-auto px-0 flex flex-col">
 
           {/* Upload Area */}
           <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-3 md:p-4 shadow-lg shadow-[#FFB5D8]/20 mb-2 md:mb-3 flex-shrink-0 flex flex-col items-center">
@@ -115,7 +115,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
 
           {/* Actions (네모박스 밖) */}
-          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 flex-shrink-0 pb-8">
+          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 pb-16 md:pb-20">
 
             <Button
               onClick={handleSave}
