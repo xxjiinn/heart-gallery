@@ -25,7 +25,7 @@ export class UploadController {
     ),
   )
   async uploadFile(
-    @UploadedFiles() files: { file?: any[]; fullFile?: any[] },
+    @UploadedFiles() files: { file?: Express.MulterS3.File[]; fullFile?: Express.MulterS3.File[] },
     @Body() body: UploadDto,
   ) {
     const croppedFile = files.file?.[0];
