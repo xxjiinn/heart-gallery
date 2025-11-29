@@ -26,8 +26,8 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
             return;
           }
 
-          // 최대 크기 설정 (800x800)
-          const maxSize = 800;
+          // 최대 크기 설정 (1200x1200)
+          const maxSize = 1200;
           let width = img.width;
           let height = img.height;
 
@@ -50,7 +50,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
           // 이미지 그리기
           ctx.drawImage(img, 0, 0, width, height);
 
-          // JPEG로 압축 (품질 85%)
+          // JPEG로 압축 (품질 92%)
           canvas.toBlob(
             (blob) => {
               if (blob) {
@@ -65,7 +65,7 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
               }
             },
             'image/jpeg',
-            0.85
+            0.92
           );
         };
         img.onerror = () => reject(new Error('Image load failed'));
