@@ -60,12 +60,12 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
                         flex items-center justify-between px-4 md:px-8">
 
         {/* Left: Back Button */}
-        <button 
+        <button
           onClick={onBackToMain}
           className="flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors"
         >
           <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
-          <span className="font-semibold text-sm md:text-base">Back</span>
+          <span className="font-semibold text-xs md:text-base">Back</span>
         </button>
         
         {/* Center Title */}

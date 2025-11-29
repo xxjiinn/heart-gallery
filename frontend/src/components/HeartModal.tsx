@@ -1,3 +1,4 @@
+import React from 'react';
 import { X } from 'lucide-react';
 import type { HeartMemory } from '../App';
 
@@ -7,6 +8,8 @@ interface HeartModalProps {
 }
 
 export function HeartModal({ memory, onClose }: HeartModalProps) {
+  const [showFullImage, setShowFullImage] = React.useState(false);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
@@ -50,7 +53,13 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
         </button>
 
         {/* Image Section - Full Width */}
-        <div className="relative w-full h-[300px] md:h-[380px] bg-gradient-to-br from-pink-50 to-purple-50 rounded-t-[32px] overflow-hidden">
+        <div
+          className="relative w-full h-[300px] md:h-[380px] bg-gradient-to-br from-pink-50 to-purple-50 rounded-t-[32px] overflow-hidden cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowFullImage(true);
+          }}
+        >
           <img
             src={memory.imageUrl}
             alt="Memory"
@@ -132,6 +141,27 @@ export function HeartModal({ memory, onClose }: HeartModalProps) {
           </div>
         </div>
       </div>
+
+      {/* Full Image Modal */}
+      {showFullImage && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setShowFullImage(false)}
+        >
+          <button
+            onClick={() => setShowFullImage(false)}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center transition-all hover:bg-white hover:scale-110"
+          >
+            <X className="w-5 h-5 text-gray-700" />
+          </button>
+          <img
+            src={memory.imageUrl}
+            alt="Memory Full"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
