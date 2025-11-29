@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Upload, X, Check, ZoomIn, ZoomOut } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -317,9 +318,9 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
       />
 
       {/* Crop Modal */}
-      {showCropModal && (
+      {showCropModal && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50"
           onClick={handleCropCancel}
         >
           <div
@@ -453,7 +454,8 @@ export function HeartUpload({ onImageUpload, uploadedImage }: HeartUploadProps) 
 
           {/* Hidden canvas for cropping */}
           <canvas ref={cropCanvasRef} style={{ display: 'none' }} />
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
