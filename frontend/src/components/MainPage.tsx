@@ -118,7 +118,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
 
           {/* Actions (네모박스 밖) */}
-          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 pb-24 md:pb-8">
+          <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 pb-6 md:pb-8">
 
             <Button
               onClick={handleSave}
@@ -143,7 +143,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           </div>
 
           {/* Footer */}
-          <div className="flex flex-col items-center mt-4 pb-12 text-center">
+          <div className="flex flex-col items-center mt-4 md:mt-4 pb-16 md:pb-12 text-center">
             <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
               AD_Live
             </p>
