@@ -1,18 +1,25 @@
 import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface IntroPageProps {
   onStart: () => void;
 }
 
 export function IntroPage({ onStart }: IntroPageProps) {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen flex flex-col items-center pt-4 px-6 pb-4" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 70%, #E0D4FF 110%)' }}>
+    <div className="min-h-screen flex flex-col items-center pt-8 px-6 pb-4" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 70%, #E0D4FF 110%)' }}>
       <div className="w-full flex flex-col items-center">
 
         {/* AD_Live Logo */}
         <div className="w-full flex justify-center mb-3">
-          <h2 className="text-[#FF0048] font-bold text-[18px]" style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}>
+          <h2
+            className="text-[#FF0048] font-bold text-[18px] cursor-pointer hover:opacity-80 transition-opacity"
+            style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}
+            onClick={() => navigate('/')}
+          >
             AD_Live
           </h2>
         </div>
@@ -29,9 +36,9 @@ export function IntroPage({ onStart }: IntroPageProps) {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col items-center justify-center mt-12 mb-8">
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-lg shadow-[#FFB5D8]/20 mb-8 max-w-md">
-            <p className="font-[Pretendard Variable] font-medium text-[#1f2937] text-[15px] leading-[24px] text-center whitespace-pre-line" style={{ wordBreak: 'keep-all' }}>
+        <div className="flex-1 flex flex-col items-center justify-center mt-16 mb-8">
+          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-10 py-12 shadow-lg shadow-[#FFB5D8]/20 mb-8 max-w-md">
+            <p className="font-[Pretendard Variable] font-medium text-[#1f2937] text-[15px] leading-[26px] text-center whitespace-pre-line" style={{ wordBreak: 'keep-all' }}>
               사랑은 언제나 우리 곁에 있습니다.
               미처 깨닫지 못했던 일상 속 사랑의 순간을 떠올려보세요.
               {'\n\n'}
@@ -42,7 +49,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
           {/* Start Button */}
           <Button
             onClick={onStart}
-            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]"
+            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base bg-[#FF56A6] hover:bg-[#FF3D95]"
           >
             <Heart className="w-5 h-5 mr-2" />
             시작하기

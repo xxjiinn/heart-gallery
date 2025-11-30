@@ -56,7 +56,11 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
 
         {/* AD_Live Logo */}
         <div className="w-full flex justify-center mb-3 md:mb-4">
-          <h2 className="text-[#FF0048] font-bold text-[18px] md:text-[22px]" style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}>
+          <h2
+            className="text-[#FF0048] font-bold text-[18px] md:text-[22px] cursor-pointer hover:opacity-80 transition-opacity"
+            style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}
+            onClick={() => window.location.href = '/'}
+          >
             AD_Live
           </h2>
         </div>
@@ -134,11 +138,11 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
                 w-[90%] md:w-[500px] py-6 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
                 ${isSaveDisabled
                   ? 'bg-gray-300 hover:bg-gray-300/90'
-                  : 'bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5] hover:from-[#FFA0C8] hover:to-[#FFB5D8]'}
+                  : 'bg-[#FF56A6] hover:bg-[#FF3D95]'}
               `}
             >
               <Heart className="w-5 h-5 md:w-5 md:h-5 mr-2" />
-               아!愛 모먼트 간직하기
+               순간을 간직하기
             </Button>
 
             <Button

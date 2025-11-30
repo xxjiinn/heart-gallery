@@ -57,7 +57,11 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
       <div className="flex-shrink-0 flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw]">
         {/* AD_Live Logo */}
         <div className="w-full flex justify-center mb-3 md:mb-4">
-          <h2 className="text-[#FF0048] font-bold text-[18px] md:text-[22px]" style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}>
+          <h2
+            className="text-[#FF0048] font-bold text-[18px] md:text-[22px] cursor-pointer hover:opacity-80 transition-opacity"
+            style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}
+            onClick={() => window.location.href = '/'}
+          >
             AD_Live
           </h2>
         </div>
