@@ -37,19 +37,17 @@ export function IntroPage({ onStart }: IntroPageProps) {
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col items-center justify-center mt-16 mb-8">
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-10 py-12 shadow-lg shadow-[#FFB5D8]/20 mb-8 max-w-md">
+          <div className="rounded-3xl p-10 py-12 shadow-lg shadow-[#FFB5D8]/20 mb-8 max-w-md" style={{ backgroundColor: 'rgba(255, 181, 216, 0.2)' }}>
             <p className="font-[Pretendard Variable] font-medium text-[#1f2937] text-[15px] leading-[26px] text-center whitespace-pre-line" style={{ wordBreak: 'keep-all' }}>
-              사랑은 언제나 우리 곁에 있습니다.
-              미처 깨닫지 못했던 일상 속 사랑의 순간을 떠올려보세요.
-              {'\n\n'}
-              "아! 이건 틀림 없이 사랑이다!" 싶은 순간이 있다면 이곳 아!(愛) 모먼트 갤러리에 간직해보세요.
+              {'사랑은 언제나 우리 곁에 있습니다.\n미처 깨닫지 못했던 일상 속 사랑의 순간을 떠올려보세요.\n\n"아! 이건 틀림 없이 사랑이다!" 싶은 순간이 있다면\n이곳 아!(愛) 모먼트 갤러리에 간직해보세요.'}
             </p>
           </div>
 
           {/* Start Button */}
           <Button
             onClick={onStart}
-            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base bg-[#FF56A6] hover:bg-[#FF3D95]"
+            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base hover:opacity-90"
+            style={{ backgroundColor: 'rgba(255, 181, 216, 0.3)' }}
           >
             <Heart className="w-5 h-5 mr-2" />
             시작하기
@@ -57,11 +55,11 @@ export function IntroPage({ onStart }: IntroPageProps) {
         </div>
 
         {/* Footer */}
-        <div className="mt-auto pb-8 text-center">
+        <div className="mt-auto pb-12 text-center">
           <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[14px] leading-[20px]">
             2025-2 중구난방 전시
           </p>
-          <p className="font-[Pretendard Variable] font-semibold text-[#FFB5D8] text-[16px] leading-[22px] mt-1">
+          <p className="font-[Pretendard Variable] font-semibold text-[#FF56A6] text-[16px] leading-[22px] mt-1">
             愛드립
           </p>
         </div>

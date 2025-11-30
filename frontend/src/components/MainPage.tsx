@@ -134,12 +134,10 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
             <Button
               onClick={handleSave}
               disabled={isSaveDisabled}
-              className={`
-                w-[90%] md:w-[500px] py-6 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
-                ${isSaveDisabled
-                  ? 'bg-gray-300 hover:bg-gray-300/90'
-                  : 'bg-[#FF56A6] hover:bg-[#FF3D95]'}
-              `}
+              className="w-[90%] md:w-[500px] py-6 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base hover:opacity-90"
+              style={{
+                backgroundColor: isSaveDisabled ? '#d1d5db' : 'rgba(255, 181, 216, 0.3)'
+              }}
             >
               <Heart className="w-5 h-5 md:w-5 md:h-5 mr-2" />
                순간을 간직하기
