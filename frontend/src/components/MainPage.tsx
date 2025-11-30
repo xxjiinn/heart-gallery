@@ -136,7 +136,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
               disabled={isSaveDisabled}
               className={`
                 w-[90%] md:w-[500px] py-6 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base md:text-base
-                ${isSaveDisabled ? 'bg-gray-300 hover:bg-gray-300/90' : 'bg-[#FF56A6] hover:bg-[#FF3D95]'}
+                ${isSaveDisabled ? 'bg-gray-300 hover:bg-gray-300/90' : 'bg-[#FF7DBF] hover:bg-[#FF56A6]'}
               `}
             >
               <Heart className="w-5 h-5 md:w-5 md:h-5 mr-2" />
