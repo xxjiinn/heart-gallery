@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import { IntroPage } from './components/IntroPage';
 import { MainPage } from './components/MainPage';
 import { SquarePage } from './components/SquarePage';
@@ -22,6 +23,11 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
+  // GA4 초기화
+  useEffect(() => {
+    ReactGA.initialize('G-RYJR69VJXD');
+  }, []);
 
   // 모바일 감지
   useEffect(() => {
@@ -103,6 +109,12 @@ export default function App() {
 
       // 로딩 끝
       setIsSaving(false);
+
+      // GA4 이벤트 전송
+      ReactGA.event('card_created', {
+        event_category: 'engagement',
+        event_label: 'memory_saved'
+      });
 
       // 성공 모달 표시
       setShowSuccessModal(true);
