@@ -25,7 +25,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col items-center justify-center mt-12 mb-6">
+        <div className="flex-1 flex flex-col items-center justify-center mt-12 mb-10">
           <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-10 py-24 mb-8 max-w-md shadow-lg shadow-[#FFB5D8]/20">
             <p className="font-[Pretendard Variable] font-medium text-[#1f2937] text-[16px] leading-[24px] text-center whitespace-pre-line" style={{ wordBreak: 'keep-all' }}>
               {'사랑은 언제나 우리 곁에 있습니다.\n미처 깨닫지 못했던 일상 속 사랑의 순간을 떠올려보세요.\n\n"아! 이건 틀림 없이 사랑이다!" 싶은\n순간이 있다면\n이곳 아!(愛) 모먼트 갤러리에 간직해보세요.'}

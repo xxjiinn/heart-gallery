@@ -55,7 +55,14 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
       <div className="w-full flex flex-col items-center">
 
         {/* Header Bar */}
-        <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
+        <div
+          className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0 md:cursor-default cursor-pointer"
+          onClick={() => {
+            if (window.innerWidth < 768) {
+              window.location.href = '/';
+            }
+          }}
+        >
           <div className="flex items-center gap-[11px]">
             <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" />
             <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[85px] md:w-[100px] text-center">
@@ -143,7 +150,7 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
           </div>
 
           {/* Footer */}
-          <div className="flex flex-col items-center mt-4 md:mt-4 pb-24 md:pb-12 text-center">
+          <div className="flex flex-col items-center mt-4 md:mt-4 pb-32 md:pb-12 text-center">
             <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
               AD_Live
             </p>
