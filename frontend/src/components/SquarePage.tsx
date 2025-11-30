@@ -172,7 +172,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
               {/* Footer - Mobile (마지막 행에 추가) */}
               {rowIndex === rows.length - 1 && (
-                <div className="flex md:hidden col-span-2 flex-col items-center mt-12 pb-8 text-center w-full">
+                <div className="flex md:hidden col-span-2 flex-col items-center mt-12 pb-12 text-center w-full">
                   <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
                     AD_Live
                   </p>
