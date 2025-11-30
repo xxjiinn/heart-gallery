@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { IntroPage } from './components/IntroPage';
 import { MainPage } from './components/MainPage';
 import { SquarePage } from './components/SquarePage';
 
@@ -18,8 +19,19 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);                  // 저장 중.
   const [showSuccessModal, setShowSuccessModal] = useState(false);    // 저장 성공.
+  const [isMobile, setIsMobile] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
+  // 모바일 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Fetch memories on load
   // useEffect의 의존성 배열(두번째 인자)이 빈 배열([]) 이므로, 이 훅은 처음 화면에 마운트(Mount)될 때 (페이지에 처음 나타날 때) 오직 1회만 실행된다. 
@@ -113,12 +125,21 @@ export default function App() {
         <Routes>
           <Route
             path="/"
+            element={
+              isMobile ? (
+                <IntroPage onStart={() => navigate('/main')} />
+              ) : (
+                <MainPage onSave={handleSaveMemory} onViewGallery={() => navigate('/gallery')} />
+              )
+            }
+          />
+          <Route
+            path="/main"
             element={<MainPage onSave={handleSaveMemory} onViewGallery={() => navigate('/gallery')} />}
             // MainPage로 보낼 때 onSave 함수와 onViewGallery 함수를 '호출'하는게 아니라, 일단 '정의'만 해서 보내줌. 
             // 그리고 나중에 MainPage 내에서 각 함수를 호출하면 그때 여기로 다시 와서 값을 반환함.
             // 예를 들어, currentPage가 main이면 일단 onSave와 onViewGallery 함수를 MainPage로 보냄. 만약 사용자가 'View Gallery' 버튼을 눌러서 MainPage에서 onViewGallery를 호출하면 여기로 와서
             // 익명 함수인 () => setCurrentPage('square')를 호출함으로써 setCurrentPage를 square로 변경함.
-
           />
           <Route
             path="/gallery"

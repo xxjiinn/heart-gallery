@@ -29,8 +29,8 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
       // 첫 전환 후 7초마다 반복
       intervalRef.current = setInterval(() => {
         setShowImage(prev => !prev);
-      }, 7000);
-    }, 6000);
+      }, 5000);
+    }, 4000);
 
     return () => {
       clearTimeout(firstTimeout);
@@ -66,7 +66,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
           }
         }
       `}</style>
@@ -101,12 +101,12 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             </filter>
           </defs>
 
-          {/* White background when showing text */}
+          {/* Background when showing text */}
           {!showImage && (
             <rect
               width="24"
               height="24"
-              fill="white"
+              fill="#FFF9FC"
               clipPath={`url(#heart-clip-${memory.id})`}
             />
           )}

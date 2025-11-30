@@ -54,6 +54,13 @@ export function MainPage({ onSave, onViewGallery }: MainPageProps) {
     <div className="min-h-screen flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw] pb-4 md:pb-[3vh]">
       <div className="w-full flex flex-col items-center">
 
+        {/* AD_Live Logo */}
+        <div className="w-full flex justify-center mb-3 md:mb-4">
+          <h2 className="text-[#FF0048] font-bold text-[18px] md:text-[22px]" style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}>
+            AD_Live
+          </h2>
+        </div>
+
         {/* Header Bar */}
         <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
           <div className="flex items-center gap-[11px]">

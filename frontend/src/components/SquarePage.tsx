@@ -47,14 +47,22 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
               transform: translateY(0px) translateZ(0);
             }
             50% {
-              transform: translateY(-5px) translateZ(0);
+              transform: translateY(-10px) translateZ(0);
             }
           }
         `).join('\n')}
       `}</style>
 
-      {/* Header Bar - Fixed */}
-      <div className="flex-shrink-0 flex items-center justify-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw]">
+      {/* Header Section - Fixed */}
+      <div className="flex-shrink-0 flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw]">
+        {/* AD_Live Logo */}
+        <div className="w-full flex justify-center mb-3 md:mb-4">
+          <h2 className="text-[#FF0048] font-bold text-[18px] md:text-[22px]" style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}>
+            AD_Live
+          </h2>
+        </div>
+
+        {/* Header Bar */}
         <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
                         shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
                         flex items-center justify-between px-4 md:px-8">
