@@ -47,7 +47,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
         </div>
 
         {/* Footer */}
-        <div className="mt-4 pb-12 md:pb-12 left-0 right-0 text-center">
+        <div className="mt-4 pb-20 md:pb-12 left-0 right-0 text-center">
           <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
             AD_Live
           </p>
