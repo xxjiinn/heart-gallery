@@ -71,11 +71,9 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         
         {/* Center Title */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[6px] md:gap-[11px] md:cursor-default cursor-pointer"
+          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[6px] md:gap-[11px] cursor-pointer"
           onClick={() => {
-            if (window.innerWidth < 768) {
-              window.location.href = '/';
-            }
+            window.location.href = '/';
           }}
         >
           <Heart className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />

@@ -147,13 +147,7 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              isMobile ? (
-                <IntroPage onStart={() => navigate('/upload')} />
-              ) : (
-                <MainPage onSave={handleSaveMemory} onViewGallery={() => navigate('/gallery')} />
-              )
-            }
+            element={<IntroPage onStart={() => navigate('/upload')} />}
           />
           <Route
             path="/upload"
