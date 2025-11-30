@@ -143,7 +143,7 @@ export default function App() {
           />
           <Route
             path="/gallery"
-            element={<SquarePage memories={memories} onBackToMain={() => navigate('/')} isLoading={isLoading} />}
+            element={<SquarePage memories={memories} onBackToMain={() => navigate('/upload')} isLoading={isLoading} />}
           />
         </Routes>
       </div>
