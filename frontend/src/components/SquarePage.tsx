@@ -81,12 +81,12 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
         </button>
         
         {/* Center Title */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[11px]">
-          <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
-          <h1 className="text-[#A381FF] font-semibold text-[17px] md:text-[20px] leading-[20px] md:leading-[24px] w-[135px] md:w-[160px] text-center">
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[8px] md:gap-[11px]">
+          <Heart className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
+          <h1 className="text-[#A381FF] font-semibold text-[15px] md:text-[20px] leading-[18px] md:leading-[24px] w-[120px] md:w-[200px] text-center whitespace-nowrap">
             아!愛 모먼트 갤러리
           </h1>
-          <Heart className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
+          <Heart className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" color="#FFB5D8" fill="#FFB5D8" strokeWidth={2} />
         </div>
 
           {/* Title과 좌우 균형을 맞추기 위한 빈 칸 */}

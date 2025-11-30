@@ -46,7 +46,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
           {/* Start Button */}
           <Button
             onClick={onStart}
-            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base bg-[#FF7DBF] hover:bg-[#FF56A6]"
+            className="w-[90%] max-w-md py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30 transition-all text-base bg-[#FF56A6]/30 hover:bg-[#FF3D95]"
           >
             <Heart className="w-5 h-5 mr-2" />
             시작하기
@@ -54,7 +54,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
         </div>
 
         {/* Footer */}
-        <div className="fixed bottom-8 left-0 right-0 text-center">
+        <div className="mt-auto pb-30 text-center">
           <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[14px] leading-[20px]">
             2025-2 중구난방 전시
           </p>
