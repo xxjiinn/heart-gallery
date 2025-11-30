@@ -55,17 +55,6 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
 
       {/* Header Section - Fixed */}
       <div className="flex-shrink-0 flex flex-col items-center pt-4 md:pt-[3.4vh] px-6 md:px-[2.85vw]">
-        {/* AD_Live Logo */}
-        <div className="w-full flex justify-center mb-3 md:mb-4">
-          <h2
-            className="text-[#FF0048] font-bold text-[18px] md:text-[22px] cursor-pointer hover:opacity-80 transition-opacity"
-            style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}
-            onClick={() => window.location.href = '/'}
-          >
-            AD_Live
-          </h2>
-        </div>
-
         {/* Header Bar */}
         <div className="w-full md:w-[calc(100vw-5.7vw)] md:max-w-[1358px] h-[56px] md:h-[72px] bg-[#FFFAF6] rounded-[16px]
                         shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)]
@@ -152,7 +141,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
               style={{
                 maxWidth: '1792px',
                 margin: '0 auto',
-                paddingBottom: rowIndex === rows.length - 1 ? '80px' : '4px',
+                paddingBottom: rowIndex === rows.length - 1 ? (isMobile ? '80px' : '70px') : '4px',
                 paddingLeft: '8px',
                 paddingRight: '8px',
               }}
@@ -168,6 +157,30 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
                   />
                 );
               })}
+
+              {/* Footer - Desktop (마지막 행에 추가) */}
+              {rowIndex === rows.length - 1 && (
+                <div className="hidden md:flex col-span-4 flex-col items-center mt-12 pb-0 text-center w-full">
+                  <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
+                    AD_Live
+                  </p>
+                  <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[12px] leading-[16px] mt-1">
+                    2025-2 중구난방 전시: 愛드립
+                  </p>
+                </div>
+              )}
+
+              {/* Footer - Mobile (마지막 행에 추가) */}
+              {rowIndex === rows.length - 1 && (
+                <div className="flex md:hidden col-span-2 flex-col items-center mt-12 pb-8 text-center w-full">
+                  <p className="font-[Pretendard Variable] font-semibold text-[#6b7280] text-[13px] leading-[18px]">
+                    AD_Live
+                  </p>
+                  <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[12px] leading-[16px] mt-1">
+                    2025-2 중구난방 전시: 愛드립
+                  </p>
+                </div>
+              )}
             </div>
           )}
         />
@@ -177,19 +190,6 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
       {selectedMemory && (
         <HeartModal memory={selectedMemory} onClose={handleCloseModal} />
       )}
-
-      {/* <div className="flex justify-center mt-6 mb-6 md:mb-10 flex-shrink-0">
-        <Button
-          onClick={onBackToMain}
-          className="w-full md:w-[500px] py-3.5 md:py-6 rounded-2xl text-white shadow-lg shadow-[#FFB5D8]/30
-                     bg-gradient-to-r from-[#FFB5D8] to-[#FFC9E5]
-                     hover:from-[#FFA0C8] hover:to-[#FFB5D8]
-                     text-base md:text-lg font-bold transition-all"
-        >
-          <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-          돌아가기
-        </Button>
-      </div> */}
     </div>
   );
 }

@@ -24,9 +24,17 @@ export default function App() {
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-  // GA4 초기화
+  // GA4 초기화 및 사용자 ID 설정
   useEffect(() => {
     ReactGA.initialize('G-RYJR69VJXD');
+
+    // 고유 사용자 ID 생성 및 저장
+    let userId = localStorage.getItem('user_id');
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem('user_id', userId);
+    }
+    ReactGA.set({ userId });
   }, []);
 
   // 모바일 감지
@@ -110,10 +118,12 @@ export default function App() {
       // 로딩 끝
       setIsSaving(false);
 
-      // GA4 이벤트 전송
+      // GA4 이벤트 전송 (user_id 포함)
+      const userId = localStorage.getItem('user_id');
       ReactGA.event('card_created', {
         event_category: 'engagement',
-        event_label: 'memory_saved'
+        event_label: 'memory_saved',
+        user_id: userId
       });
 
       // 성공 모달 표시

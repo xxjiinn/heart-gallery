@@ -13,17 +13,6 @@ export function IntroPage({ onStart }: IntroPageProps) {
     <div className="min-h-screen flex flex-col items-center pt-8 px-6 pb-4" style={{ background: 'linear-gradient(to bottom, #FFF8F0 10%, #FFD6E8 70%, #E0D4FF 110%)' }}>
       <div className="w-full flex flex-col items-center">
 
-        {/* AD_Live Logo */}
-        <div className="w-full flex justify-center mb-3">
-          <h2
-            className="text-[#FF0048] font-bold text-[18px] cursor-pointer hover:opacity-80 transition-opacity"
-            style={{ fontFamily: 'Gotham, sans-serif', fontWeight: 900 }}
-            onClick={() => navigate('/')}
-          >
-            AD_Live
-          </h2>
-        </div>
-
         {/* Header Bar */}
         <div className="w-full h-[56px] bg-[#FFFAF6] rounded-[16px] shadow-[0_10px_15px_-3px_rgba(255,181,216,0.20),0_4px_6px_-4px_rgba(255,181,216,0.20)] flex items-center justify-center flex-shrink-0">
           <div className="flex items-center gap-[11px]">
@@ -55,11 +44,11 @@ export function IntroPage({ onStart }: IntroPageProps) {
 
         {/* Footer */}
         <div className="fixed bottom-8 left-0 right-0 text-center">
-          <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[14px] leading-[20px]">
-            2025-2 중구난방 전시
+          <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[13px] leading-[18px]">
+            2025-2 전시: 愛드립
           </p>
-          <p className="font-[Pretendard Variable] font-semibold text-[#FF56A6] text-[16px] leading-[22px] mt-1">
-            愛드립
+          <p className="font-[Pretendard Variable] font-medium text-[#6b7280] text-[13px] leading-[18px] mt-0.5">
+            한동대학교 광고학회 <span className="font-semibold">AD_Live</span>
           </p>
         </div>
 
