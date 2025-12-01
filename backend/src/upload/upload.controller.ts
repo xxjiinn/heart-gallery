@@ -50,7 +50,9 @@ export class UploadController {
     });
 
     // 새 카드를 모든 연결된 클라이언트에 실시간 전송
-    this.io.emit('new_card', saved);
+    if (this.io) {
+      this.io.emit('new_card', saved);
+    }
 
     return {
       message: 'File uploaded & saved!',
