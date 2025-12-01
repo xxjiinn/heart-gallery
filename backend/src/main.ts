@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Server } from 'socket.io';
+import { SocketService } from './socket/socket.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,8 +24,9 @@ async function bootstrap() {
     },
   });
 
-  // Socket.IO를 전역으로 사용할 수 있도록 저장
-  global['io'] = io;
+  // SocketService에 Socket.IO 인스턴스 설정
+  const socketService = app.get(SocketService);
+  socketService.setServer(io);
 
   io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);

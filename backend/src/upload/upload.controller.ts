@@ -4,19 +4,18 @@ import {
   Post,
   UploadedFiles,
   UseInterceptors,
-  Inject,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { s3Storage } from './upload.s3';
 import { PrismaService } from '../prisma/prisma.service';
 import { UploadDto } from './upload.dto';
-import { Server } from 'socket.io';
+import { SocketService } from '../socket/socket.service';
 
 @Controller('upload')
 export class UploadController {
   constructor(
     private prisma: PrismaService,
-    @Inject('IO') private io: Server,
+    private socketService: SocketService,
   ) {}
 
   @Post()
@@ -50,12 +49,7 @@ export class UploadController {
     });
 
     // 새 카드를 모든 연결된 클라이언트에 실시간 전송
-    if (this.io) {
-      console.log('Emitting new_card event:', saved.id);
-      this.io.emit('new_card', saved);
-    } else {
-      console.log('WARNING: Socket.IO instance not available');
-    }
+    this.socketService.emit('new_card', saved);
 
     return {
       message: 'File uploaded & saved!',
