@@ -1,18 +1,20 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { HeartCard } from './HeartCard';
 import { HeartModal } from './HeartModal';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart } from 'lucide-react';
 import type { HeartMemory } from '../App';
+import { io, Socket } from 'socket.io-client';
 
 interface SquarePageProps {
   memories: HeartMemory[];
   onBackToMain: () => void;
   isLoading?: boolean;
+  onNewCard?: (newCard: HeartMemory) => void;
 }
 
-export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProps) {
+export function SquarePage({ memories, onBackToMain, isLoading, onNewCard }: SquarePageProps) {
   const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
 
   const handleCardClick = useCallback((memory: HeartMemory) => {
@@ -22,6 +24,32 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
   const handleCloseModal = useCallback(() => {
     setSelectedMemory(null);
   }, []);
+
+  // WebSocket 연결 및 실시간 업데이트
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    const socket: Socket = io(apiUrl);
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('new_card', (newCard: HeartMemory) => {
+      console.log('New card received:', newCard);
+      if (onNewCard) {
+        onNewCard(newCard);
+      }
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server');
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 빈 배열: 컴포넌트 마운트 시 1회만 연결, 언마운트 시 연결 해제 (onNewCard는 useCallback으로 메모이제이션됨)
 
   // 모바일/데스크탑 감지
   const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);

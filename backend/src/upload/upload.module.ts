@@ -4,6 +4,14 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
   controllers: [UploadController],
-  providers: [PrismaService],
+  providers: [
+    PrismaService,
+    {
+      provide: 'IO',
+      useFactory: () => {
+        return global['io'];
+      },
+    },
+  ],
 })
 export class UploadModule {}

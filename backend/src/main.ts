@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Server } from 'socket.io';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +13,27 @@ async function bootstrap() {
   });
 
   const port = process.env.PORT || 3000;
-  await app.listen(port);
+  const server = await app.listen(port);
+
+  // Socket.IO 설정
+  const io = new Server(server, {
+    cors: {
+      origin: corsOrigin.split(','),
+      credentials: false,
+    },
+  });
+
+  // Socket.IO를 전역으로 사용할 수 있도록 저장
+  global['io'] = io;
+
+  io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+
+    socket.on('disconnect', () => {
+      console.log('Client disconnected:', socket.id);
+    });
+  });
+
   console.log(`Application is running on port ${port}`);
 }
 bootstrap();

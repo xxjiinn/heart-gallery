@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import { IntroPage } from './components/IntroPage';
@@ -83,6 +83,20 @@ export default function App() {
     }
   };
 
+  // WebSocket으로 받은 새 카드를 처리 (중복 방지 포함)
+  const handleNewCard = useCallback((newCard: HeartMemory) => {
+    setMemories((prev) => {
+      // 이미 존재하는 카드인지 체크 (카드의 id로 판단)
+      const exists = prev.some(memory => memory.id === newCard.id);
+      if (exists) {
+        console.log('Card already exists, skipping:', newCard.id);
+        return prev; // 상태 변경 없음
+      }
+      console.log('Adding new card from WebSocket:', newCard.id);
+      return [newCard, ...prev]; // 새 카드 추가
+    });
+  }, []);
+
   const handleSaveMemory = async (croppedFile: File, fullFile: File, nickname: string, message: string) => {
     try {
       // 로딩 시작
@@ -159,7 +173,14 @@ export default function App() {
           />
           <Route
             path="/gallery"
-            element={<SquarePage memories={memories} onBackToMain={() => navigate('/upload')} isLoading={isLoading} />}
+            element={
+              <SquarePage
+                memories={memories}
+                onBackToMain={() => navigate('/upload')}
+                isLoading={isLoading}
+                onNewCard={handleNewCard}
+              />
+            }
           />
         </Routes>
       </div>

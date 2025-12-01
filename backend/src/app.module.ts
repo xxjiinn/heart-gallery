@@ -15,6 +15,15 @@ import { UploadModule } from './upload/upload.module';
     UploadModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: 'IO',
+      useFactory: () => {
+        // main.ts에서 설정된 io를 사용
+        return global['io'];
+      },
+    },
+  ],
+  exports: ['IO'],
 })
 export class AppModule {}

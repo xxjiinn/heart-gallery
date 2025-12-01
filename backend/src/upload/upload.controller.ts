@@ -4,15 +4,20 @@ import {
   Post,
   UploadedFiles,
   UseInterceptors,
+  Inject,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { s3Storage } from './upload.s3';
 import { PrismaService } from '../prisma/prisma.service';
 import { UploadDto } from './upload.dto';
+import { Server } from 'socket.io';
 
 @Controller('upload')
 export class UploadController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject('IO') private io: Server,
+  ) {}
 
   @Post()
   @UseInterceptors(
@@ -43,6 +48,9 @@ export class UploadController {
         message: body.message,
       },
     });
+
+    // 새 카드를 모든 연결된 클라이언트에 실시간 전송
+    this.io.emit('new_card', saved);
 
     return {
       message: 'File uploaded & saved!',
