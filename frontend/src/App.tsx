@@ -47,13 +47,6 @@ export default function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Fetch memories on load
-  // useEffect의 의존성 배열(두번째 인자)이 빈 배열([]) 이므로, 이 훅은 처음 화면에 마운트(Mount)될 때 (페이지에 처음 나타날 때) 오직 1회만 실행된다.
-  // 즉, setMemories 호출로 인해 App 컴포넌트가 재렌더링되더라도, fetchMemories()는 다시 호출되지 않는다.
-  useEffect(() => {
-    fetchMemories();
-  }, [fetchMemories]);
-
   const fetchMemories = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -82,6 +75,13 @@ export default function App() {
       setIsLoading(false);
     }
   }, [apiUrl]);
+
+  // Fetch memories on load
+  // useEffect의 의존성 배열(두번째 인자)이 빈 배열([]) 이므로, 이 훅은 처음 화면에 마운트(Mount)될 때 (페이지에 처음 나타날 때) 오직 1회만 실행된다.
+  // 즉, setMemories 호출로 인해 App 컴포넌트가 재렌더링되더라도, fetchMemories()는 다시 호출되지 않는다.
+  useEffect(() => {
+    fetchMemories();
+  }, [fetchMemories]);
 
   // WebSocket으로 받은 새 카드를 처리 (중복 방지 포함)
   const handleNewCard = useCallback((newCard: HeartMemory) => {
