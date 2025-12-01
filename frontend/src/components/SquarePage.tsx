@@ -12,9 +12,10 @@ interface SquarePageProps {
   onBackToMain: () => void;
   isLoading?: boolean;
   onNewCard?: (newCard: HeartMemory) => void;
+  onRefresh?: () => void;
 }
 
-export function SquarePage({ memories, onBackToMain, isLoading, onNewCard }: SquarePageProps) {
+export function SquarePage({ memories, onBackToMain, isLoading, onNewCard, onRefresh }: SquarePageProps) {
   const [selectedMemory, setSelectedMemory] = useState<HeartMemory | null>(null);
 
   const handleCardClick = useCallback((memory: HeartMemory) => {
@@ -50,6 +51,18 @@ export function SquarePage({ memories, onBackToMain, isLoading, onNewCard }: Squ
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // 빈 배열: 컴포넌트 마운트 시 1회만 연결, 언마운트 시 연결 해제 (onNewCard는 useCallback으로 메모이제이션됨)
+
+  // 1분마다 자동 새로고침 (DB에서 수동 삭제한 카드 반영용)
+  useEffect(() => {
+    if (!onRefresh) return;
+
+    const interval = setInterval(() => {
+      console.log('Auto-refreshing memories...');
+      onRefresh();
+    }, 60000); // 60초 = 1분
+
+    return () => clearInterval(interval);
+  }, [onRefresh]);
 
   // 모바일/데스크탑 감지
   const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
