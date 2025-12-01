@@ -30,7 +30,7 @@ export function IntroPage({ onStart }: IntroPageProps) {
             <p className="font-[Pretendard Variable] font-medium text-[#1f2937] text-[16px] md:text-[18px] leading-[26px] md:leading-[32px] text-center whitespace-pre-line" style={{ wordBreak: 'keep-all' }}>
               {'사랑은 언제나 우리 곁에 있습니다.\n미처 깨닫지 못했던 일상 속 사랑의 순간을 떠올려보세요.\n\n'}
               <span className="text-[#A381FF] font-semibold text-[16.5px] md:text-[22px]">"아! 이건 틀림 없이 사랑이다!"</span>
-              {' 싶은\n순간이 있다면\n이곳 아!(愛) 모먼트 갤러리에 간직해보세요.'}
+              {'\n싶은 순간이 있다면\n이곳 아!(愛) 모먼트 갤러리에 간직해보세요.'}
             </p>
           </div>
 
