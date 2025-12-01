@@ -111,7 +111,7 @@ export function SquarePage({ memories, onBackToMain, isLoading }: SquarePageProp
           totalCount={rows.length}
           components={{
             Header: () => (
-              <div className="text-center mt-5 md:mt-[20px] mb-4 md:mb-[1vh] px-6 md:px-[2.85vw]">
+              <div className="text-center mt-5 md:mt-[5vh] mb-4 md:mb-[1vh] px-6 md:px-[2.85vw]">
                 <div className="w-full md:w-[438px] h-auto mx-auto flex flex-col items-center justify-center">
                   <p
                     className="font-[Pretendard Variable] font-semibold text-[#8C66FF] opacity-70 md:opacity-100 text-[15px] md:text-[16px] leading-[20px] md:leading-[22px] text-center"
