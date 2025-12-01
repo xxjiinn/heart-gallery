@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface IntroPageProps {
   onStart: () => void;
-}
+}//
 
 export function IntroPage({ onStart }: IntroPageProps) {
   const navigate = useNavigate();
