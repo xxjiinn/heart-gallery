@@ -51,7 +51,10 @@ export class UploadController {
 
     // 새 카드를 모든 연결된 클라이언트에 실시간 전송
     if (this.io) {
+      console.log('Emitting new_card event:', saved.id);
       this.io.emit('new_card', saved);
+    } else {
+      console.log('WARNING: Socket.IO instance not available');
     }
 
     return {
