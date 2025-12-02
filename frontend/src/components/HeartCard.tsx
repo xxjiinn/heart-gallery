@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -20,23 +20,22 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   const [showImage, setShowImage] = useState(startWithImage);
   const [strokeWidth, setStrokeWidth] = useState(0.3);
   const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // 첫 번째 전환: 6초 후
-    const firstTimeout = setTimeout(() => {
+    // 첫 번째 전환: 4초 후
+    timeoutRef.current = setTimeout(() => {
       setShowImage(prev => !prev);
 
-      // 첫 전환 후 7초마다 반복
+      // 첫 전환 후 5초마다 반복
       intervalRef.current = setInterval(() => {
         setShowImage(prev => !prev);
       }, 5000);
     }, 4000);
 
     return () => {
-      clearTimeout(firstTimeout);
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, []);
 
@@ -50,10 +49,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
 
   return (
     <div
-      className="flex items-center justify-center cursor-pointer relative"
-      onClick={(e) => {
-        onClick?.();
-      }}
+      className="flex items-center justify-center relative"
       style={{
         aspectRatio: '1',
         maxWidth: '500px',
@@ -88,6 +84,7 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
             inset: 0,
             width: '100%',
             height: '100%',
+            pointerEvents: 'none',
           }}
           viewBox="0 0 24 24"
           preserveAspectRatio="xMidYMid meet"
@@ -135,6 +132,18 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
               transition: 'stroke-width 1.0s ease-in-out',
             }}
           />
+
+          {/* Clickable heart shape overlay */}
+          <path
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+            fill="transparent"
+            className="cursor-pointer"
+            style={{ pointerEvents: 'auto' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick?.();
+            }}
+          />
         </svg>
 
         {/* Text layer as HTML overlay (inside floating wrapper) */}
@@ -180,8 +189,4 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   );
 }
 
-export const HeartCard = memo(HeartCardComponent, (prevProps, nextProps) => {
-  // onClick은 비교에서 제외하고, memory와 index만 비교
-  return prevProps.memory.id === nextProps.memory.id &&
-         prevProps.index === nextProps.index;
-});
+export const HeartCard = HeartCardComponent;
