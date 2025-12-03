@@ -59,7 +59,7 @@ export function SquarePage({ memories, onBackToMain, isLoading, onNewCard, onRef
     const interval = setInterval(() => {
       console.log('Auto-refreshing memories...');
       onRefresh();
-    }, 600000); // 600초 = 10분
+    }, 60000); // 600초 = 10분
 
     return () => clearInterval(interval);
   }, [onRefresh]);
@@ -200,6 +200,8 @@ export function SquarePage({ memories, onBackToMain, isLoading, onNewCard, onRef
                     memory={memory}
                     index={globalIndex}
                     onClick={() => handleCardClick(memory)}
+                    showImage={cardStates[memory.id]?.showImage}
+                    onToggleChange={(showImage) => handleToggleChange(memory.id, showImage)}
                   />
                 );
               })}
