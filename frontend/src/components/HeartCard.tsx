@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import type { HeartMemory } from '../App';
 
 interface HeartCardProps {
@@ -189,4 +189,6 @@ function HeartCardComponent({ memory, index, onClick }: HeartCardProps) {
   );
 }
 
-export const HeartCard = HeartCardComponent;
+export const HeartCard = memo(HeartCardComponent, (prev, next) => {
+  return prev.memory.id === next.memory.id && prev.index === next.index;
+});

@@ -200,8 +200,6 @@ export function SquarePage({ memories, onBackToMain, isLoading, onNewCard, onRef
                     memory={memory}
                     index={globalIndex}
                     onClick={() => handleCardClick(memory)}
-                    showImage={cardStates[memory.id]?.showImage}
-                    onToggleChange={(showImage) => handleToggleChange(memory.id, showImage)}
                   />
                 );
               })}
